@@ -1,4 +1,4 @@
-apt-get install nodejs-legacy npm ipython ipython-notebook libzmq3-dev
+sudo apt-get install nodejs-legacy npm ipython ipython-notebook libzmq3-dev python3-pip
 npm install -g ijavascript
 pip3 install jupyter
 jupyter nbconvert notebook/JavascriptNotebook.ipynb --to markdown
