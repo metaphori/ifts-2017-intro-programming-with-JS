@@ -1,0 +1,3 @@
+How to convert notebook to markdown:
+
+$ jupyter nbconvert JavascriptNotebook.ipynb --to markdown
