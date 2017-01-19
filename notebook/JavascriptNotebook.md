@@ -1,19 +1,74 @@
 
 # Notebook
 
-Questo è un "quaderno" per imparare le basi della programmazione nel linguaggio JavaScript.
+Questo "quaderno" è un supporto per questo modulo IFTS di introduzione alla programmazione nel linguaggio JavaScript.
 
-## Programma
+Pagine relative alle lezioni:
+1. [Lezione xx/01/2017](#lezione-xx01)
 
-### Parte 0: Introduzione
+# Lezioni
 
-1. Presentazioni
-1. Descrizione modulo: obiettivi, modalità, contenuti
-1. Rudimenti: cos'è il software, ciclo di sviluppo del software
+<a name="lezione-xx01"></a><hr />
+## Lezione 1:  xx/01/2017
+
+Sommario
+* Presentazioni
+* Introduzione al modulo
+
+### i) Presentazioni
+
+* **Chi sono**: Roberto Casadei, dottorando in Computer Science & Engineering all'Università di Bologna 
+* **Chi siete?**
+    - Competenze "al computer"
+    - Esperienza con la programmazione
+    - Esperienza con linguaggi imperativi/object-oriented
+    - Esperienza con JavaScript
+
+### ii) Descrizione modulo (prima parte)
+
+Corso di introduzione alla programmazione
+* Pragmatico, operativo, abilitante, di base
+
+#### Obiettivi
+
+* Alla fine del modulo, si è in grado di comprendere e scrivere piccoli programmi, già orientati a contesti applicativi specifici (ad es. web)
+
+#### Modalità
+
+* Teoria minimale e approccio pratico
+
+#### Contenuti: panoramica
+
+* Rudimenti: software e programmazione
+* Impostazione di un ambiente per lo sviluppo e l'esecuzione di programmi
+* **Basi della programmazione in JavaScript**
+* Da JavaScript a Java/C#: cenni
+
+#### Risorse
+
+Risorse utilizzate in questo modulo:
+* http://www.html.it/guide/guida-javascript-di-base/ -- in italiano, taglio introduttivo
+
+Risorse ulteriori per approfondimenti:
+* Sulla programmazione a oggetti in JavaScript: *The Principles of Object-Oriented JavaScript*
+* Sulla versione più recente di JavaScript: *Understanding ECMAScript 6*
+
+#### Consigli
+
+* La programmazione (così come una lingua) non si impara a lezione, né sui libri: si impara mettendo in pratica, sperimentando, e utilizzando un approccio (pro)attivo
+    - Prendere appunti
+    - Idealmente, per gran parte, gli appunti dovrebbero essere il codice stesso
+* In caso di dubbi, fate domande: potrebbero servire a tutti
+
+### iii) Programma
+
+#### Parte 0: Introduzione e contestualizzazione
+
+1. Rudimenti di ingegneria del software
 1. Introduzione alla programmazione
 1. Impostazione dell'ambiente di lavoro
 
-### Parte 1: Elementi di base della programmazione in JavaScript
+#### Parte 1: Elementi di base della programmazione in JavaScript
 
 1. Introduzione a JavaScript
 1. Tipi di dato
@@ -23,10 +78,23 @@ Questo è un "quaderno" per imparare le basi della programmazione nel linguaggio
 1. Elementi di programmazione funzionale
 1. Elementi di programmazione orientata agli oggetti
 
-### Parte 2: Da JavaScript a Java/C#
+#### Parte 2: Da JavaScript a Java/C&#35;
 
 1. Sulla tipizzazione dei linguaggi 
 
+### Rudimenti di ingegneria del software
+
+#### Cos'è il software
+
+#### Ciclo di sviluppo del software
+
+<hr /><a name="lezione-yy01"></a>
+## Lezione 2: yy/11/2017
+Sommario
+* X
+* Y
+
+<hr />
 ## Risorse
 
 ### Html.it: Guida JavaScript di Base
@@ -75,7 +143,8 @@ Outline commentato ed espanso
     - Operatori di assegnamento composti: `x += y; x /= y;` etc.
     - Concatenazione di stringhe: `"ab"+"cd" // "abcd"`
 1. Conversioni tra tipi di variabili
-    - Da tipo a booleano: valori falsi sono `undefined, null, 0, NaN, ""`
+    - Da tipo a booleano: `undefined, null, 0, NaN, ""`
+    - Nota: sui "valori falsi" le cose sono complesse (http://stackoverflow.com/questions/19839952/all-falsey-values-in-javascript)
     - Da tipo a numero: `undefined` -> `NaN`, `false` -> 0, `true` -> 1, `null`->0, valori stringa dipendentemente dal valori
     - Da tipo a stringa: i valori mantengono la rappresentazione (e.g., `NaN`->"NaN", `null`->"null", ecc.)
     - Operatori polimorfi: `+` (somma numeri, concatenazione stringhe se almeno un operando è stringa), operatori relazionali (se nessuno dei due operandi è un numero, allora viene eseguito un confronto tra stringhe, altrimenti viene eseguito un confronto tra numeri), operatori di confronto `!=,==` (e entrambi gli operatori sono stringhe allora viene effettuato un confronto tra stringhe, altrimenti si esegue un confronto tra numeri; unica eccezione è `null == undefined` che è vera per definizione)
@@ -139,70 +208,3 @@ Outline commentato ed espanso
     - Metodi ereditati da `Object`: `toString` (conversione oggetto a stringa), `valueOf` (conversione oggetto a tipo primitivo); questi metodi sono chiamati implicitamente da JavaScript in alcune situazioni.
     - `valueOf` è chiamato implicitamente ogni volta che un oggetto è usato con un operatore
     - `toString` è chiamato implicitamente quando l'oggetto è utilizzato in una situazione in cui ci si aspetta una stringa
-
-## Contenuti
-
-### Presentazioni
-
-* Chi sono
-* Chi siete
-    - Competenze 'al computer', con la programmazione, con linguaggi imperativi/object-oriented, con JavaScript
-
-### Descrizione modulo
-
-Corso di introduzione alla programmazione
-* Pragmatico, operativo, abilitante, di base
-
-#### Obiettivi
-
-* Alla fine del modulo, si è in grado di comprendere e scrivere piccoli programmi, già orientati a contesti applicativi specifici (ad es. web)
-
-#### Modalità
-
-* Teoria minimale e approccio pratico
-
-#### Contenuti
-
-* Rudimenti: software e programmazione
-* Basi della programmazione in JavaScript
-
-#### Risorse
-
-* http://www.html.it/guide/guida-javascript-di-base/ -- in italiano, taglio introduttivo
-
-#### Consigli
-
-* La programmazione (così come una lingua) non si impara a lezione, né sui libri: si impara mettendo in pratica, sperimentando, e utilizzando un approccio (pro)attivo
-    - Prendere appunti
-    - Idealmente, per gran parte, gli appunti dovrebbero essere il codice stesso
-* In caso di dubbi, fate domande: potrebbero servire a tutti
-
-### Rudimenti
-
-#### Cos'è il software
-
-#### Ciclo di sviluppo del software
-
-### Introduzione alla programmazione
-
-### Impostazione dell'ambiente di lavoro
-
-
-```javascript
-console.log("Hello world")
-```
-
-    Hello world
-
-
-
-
-
-    undefined
-
-
-
-
-```javascript
-
-```
