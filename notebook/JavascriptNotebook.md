@@ -4,11 +4,15 @@
 Questo "quaderno" è un supporto per questo modulo IFTS di introduzione alla programmazione nel linguaggio JavaScript.
 
 Pagine relative alle lezioni:
+
 1. [Lezione xx/01/2017](#lezione-xx01)
 
 # Lezioni
 
-<a name="lezione-xx01"></a><hr />
+<a name="lezione-xx01"></a>
+
+---------------------------------------------------------
+
 ## Lezione 1:  xx/01/2017
 
 Sommario
@@ -88,13 +92,17 @@ Risorse ulteriori per approfondimenti:
 
 #### Ciclo di sviluppo del software
 
-<hr /><a name="lezione-yy01"></a>
+<a name="lezione-yy01"></a>
+
+------------------------------------
+
 ## Lezione 2: yy/11/2017
 Sommario
 * X
 * Y
 
-<hr />
+-----------------------------------------
+
 ## Risorse
 
 ### Html.it: Guida JavaScript di Base
