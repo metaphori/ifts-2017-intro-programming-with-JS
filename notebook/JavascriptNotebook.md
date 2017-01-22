@@ -16,8 +16,10 @@ Pagine relative alle lezioni:
 ## Lezione 1:  xx/01/2017
 
 Sommario
+
 * Presentazioni
 * Introduzione al modulo
+* Rudimenti di ingegneria del software
 
 ### i) Presentazioni
 
@@ -88,16 +90,101 @@ Risorse ulteriori per approfondimenti:
 
 ### Rudimenti di ingegneria del software
 
-#### Cos'è il software
+Prerequisiti
 
-#### Ciclo di sviluppo del software
+* Cos'è il software?
+* Come si realizza il software?
+
+#### Principi e concetti
+
+* **Ingegneria del software come disciplina**: principi, metodologie, tecnologie per migliorare il processo di sviluppo del software, rapportando conoscenza e strumenti in modo sistematico.
+* **L'idea**: il prodotto software deve risultare da un **processo** ben definito.
+    - Cioè, lo sviluppo del software non come attività episodica/artigianale ma *sistematica*.
+* **Motto**: non c'è codice senza progetto, non c'è progetto senza analisi, non c'è analisi senza requisiti.
+    - In altre parole, ci vuole una progressione dal *perché* al *cosa* al *come*
+* Il focus è la **gestione della complessità**
+    - Complessità essenziale vs. complessità accidentale
+* Tracciabilità
+
+#### Le fasi dello sviluppo del software
+
+[Le attività fondamentali (Wikipedia)](https://it.wikipedia.org/wiki/Ciclo_di_vita_del_software#Le_attivit.C3.A0_fondamentali)
+
+2. **Specifica/raccolta dei requisiti**
+3. **Analisi**
+    - Dei requisiti
+         - Casi d'uso, scenari
+         - Modello del dominio: struttura/interazione/comportamento
+         - Piani di collaudo
+    - Analisi del problema
+         - Architettura logica
+         - Valutazione dell'abstraction gap
+         - Analisi dei rischi
+5. Piano di lavoro
+6. **Progettazione (design)**
+7. **Implementazione**
+8. **Testing**
+9. Deployment
+10. Manutenzione
+
+#### Modelli di ciclo di vita di sviluppo del software 
+
+[Software Development Approaches (Wikipedia)](https://en.wikipedia.org/wiki/Software_development_process#Approaches)
+
+* [Modello a cascata (waterfall)](https://it.wikipedia.org/wiki/Modello_a_cascata)
+* [Modello iterativo / a spirale](https://it.wikipedia.org/wiki/Modello_a_spirale)
+    - Pianificazione, Analisi dei rischi, Sviluppo, Verifica
+    
+#### Metodologie di sviluppo del software
+
+* Classica
+* [Agile](https://it.wikipedia.org/wiki/Metodologia_agile)
+    - [Agile Manifesto](http://agilemanifesto.org/)
+    - Pratiche agile: sviluppo guidato dai test (TDD), consegne frequenti, interazione col cliente, programmazione in coppia, ...
+    - Sotto-metodologie: XP
+    - Framework di processo: Scrum
+
+#### Pratiche comuni
+
+* Controllo di versione
+* Automazione della build
+* Test di regressione automatici
+* Generazione della documentazione dai commenti
+* Integrazione continua
+
+#### La costruzione del software
+
+E' l'attività centrale dello sviluppo del software. Fanno parte della costruzione le sotto-attività:
+
+* Architettura del software
+* Design di dettaglio
+* Codifica e debugging
+* Testing
+
+Metafora: la costruzione di un edificio
+
+* **(Definizione del problema)** Che tipo di casa vuoi costruire?
+* **(Design architetturale)** Si interagisce con un architetto, il quale definirà un progetto di massima.
+* **(Design di dettaglio)** L'architetto sviluppa il progetto.
+* **(Costruzione)** L'impresa edile costruisce l'edificio dalle fondamenta.
+* **(Ottimizzazione)** La casa è su, ma dev'essere rifinita. Si ricorre ad operai specializzati (imbianchini, progettista di interni, ...).
+* **(Revisione e ispezione)** Durante il progetto, vari ispettori controllano il sito, le fondamenta, ...
+* Il costo principale è di manodopera.
+* Il costo per rifare da capo il progetto è molto alto; così come è alto il costo di cambiamenti strutturali.
+* Per progetti molto grandi, occorre più tempo per la pianificazione, per non incorrere in costi maggiori successivamente.
+* **(Manutenzione)** Una volta che la casa viene abitata, può essere necessario effettuare interventi riparatori.
+* **(Riuso del software)** Non tutto viene costruito da capo (travi, mobilia, elettrodomestici, ...).
+* La pianificazione, il progetto, e il controllo qualità possono essere visti a **livelli differenti**
+* A seconda del contesto e dai requisiti, diversi approcci di costruzioni possono essere usati (zona sismica? zona franosa? zona di montagna?)
 
 <a name="lezione-yy01"></a>
 
 ------------------------------------
 
 ## Lezione 2: yy/11/2017
+
 Sommario
+
 * X
 * Y
 
@@ -124,7 +211,7 @@ Outline commentato ed espanso
 1. Commenti, punti e virgola e maiuscola
     - Punto e virgola è opzionale ma buona pratica usarlo
     - Case-sensitiveness
-    - Commenti: singola linea //, e multilinea /* */
+    - Commenti: singola linea `//...`, e multilinea `/*...*/`
 1. Stringhe, numeri e altri tipi di dati JavaScript
     - 5 tipi primitivi: numeri, stringhe, booleani, Null, Undefined
     - 1 tipo di dato complesso (oggetti) da cui derivano altri elementi (ad es. array, regexps, funzioni, ...)
