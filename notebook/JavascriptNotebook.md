@@ -5,7 +5,7 @@ Questo "quaderno" è un supporto per questo modulo IFTS di introduzione alla pro
 
 Pagine relative alle lezioni:
 
-1. [Lezione xx/01/2017](#lezione-xx01)
+1. [Lezione 26/01/2017](#lezione-xx01)
 
 # Lezioni
 
@@ -13,7 +13,7 @@ Pagine relative alle lezioni:
 
 ---------------------------------------------------------
 
-## Lezione 1:  xx/01/2017
+## Lezione 1:  26/01/2017
 
 Sommario
 
@@ -33,6 +33,7 @@ Sommario
 ### ii) Descrizione modulo (prima parte)
 
 Corso di introduzione alla programmazione
+
 * Pragmatico, operativo, abilitante, di base
 
 #### Obiettivi
@@ -53,11 +54,23 @@ Corso di introduzione alla programmazione
 #### Risorse
 
 Risorse utilizzate in questo modulo:
+
 * http://www.html.it/guide/guida-javascript-di-base/ -- in italiano, taglio introduttivo
 
+Reference su JavaScript:
+
+* https://developer.mozilla.org/it/docs/Web/JavaScript/Reference
+* http://www.w3schools.com/jsref/
+
 Risorse ulteriori per approfondimenti:
+
 * Sulla programmazione a oggetti in JavaScript: *The Principles of Object-Oriented JavaScript*
 * Sulla versione più recente di JavaScript: *Understanding ECMAScript 6*
+
+Risorse per esercizi:
+
+* http://eloquentjavascript.net/code/
+* http://www.w3resource.com/javascript-exercises/
 
 #### Consigli
 
@@ -108,7 +121,21 @@ Prerequisiti
 
 #### Le fasi dello sviluppo del software
 
-[Le attività fondamentali (Wikipedia)](https://it.wikipedia.org/wiki/Ciclo_di_vita_del_software#Le_attivit.C3.A0_fondamentali)
+Dove iniziano i progetti software?
+
+* Software house
+* Sviluppatori software
+
+Progetti software
+
+* Software su commessa
+* Prodotti software a pacchetto
+* Servizi software
+    - Prodotto vs. servizio
+* Componenti software e librerie
+* Altra categorizzazione: nuovo sviluppo / mantenimento / migrazione
+  
+[Fundamental activities](https://en.wikipedia.org/wiki/Systems_development_life_cycle#Phases) ([Ita](https://it.wikipedia.org/wiki/Ciclo_di_vita_del_software#Le_attivit.C3.A0_fondamentali))
 
 2. **Specifica/raccolta dei requisiti**
 3. **Analisi**
@@ -128,32 +155,32 @@ Prerequisiti
 10. Manutenzione
 
 #### Modelli di ciclo di vita di sviluppo del software 
+  
+[Software Development Approaches](https://en.wikipedia.org/wiki/Software_development_process#Approaches) ([Ita](https://it.wikipedia.org/wiki/Ciclo_di_vita_del_software#Processi_di_sviluppo_software))
 
-[Software Development Approaches (Wikipedia)](https://en.wikipedia.org/wiki/Software_development_process#Approaches)
-
-* [Modello a cascata (waterfall)](https://it.wikipedia.org/wiki/Modello_a_cascata)
-* [Modello iterativo / a spirale](https://it.wikipedia.org/wiki/Modello_a_spirale)
+* [Waterfall model](https://en.wikipedia.org/wiki/Waterfall_model) ([Ita](https://it.wikipedia.org/wiki/Modello_a_cascata))
+* [Spiral model](https://en.wikipedia.org/wiki/Spiral_model) ([Ita](https://it.wikipedia.org/wiki/Modello_a_spirale))
     - Pianificazione, Analisi dei rischi, Sviluppo, Verifica
     
 #### Metodologie di sviluppo del software
 
 * Classica
-* [Agile](https://it.wikipedia.org/wiki/Metodologia_agile)
-    - [Agile Manifesto](http://agilemanifesto.org/)
+* [Agile](https://en.wikipedia.org/wiki/Agile_software_development) ([Ita](https://it.wikipedia.org/wiki/Metodologia_agile))
+    - [Agile Manifesto](http://agilemanifesto.org/) ([Ita](http://agilemanifesto.org/iso/it/manifesto.html))
     - Pratiche agile: sviluppo guidato dai test (TDD), consegne frequenti, interazione col cliente, programmazione in coppia, ...
     - Sotto-metodologie: XP
     - Framework di processo: Scrum
 
-#### Pratiche comuni
+#### A proposito dei requisiti
 
-* Controllo di versione
-* Automazione della build
-* Test di regressione automatici
-* Generazione della documentazione dai commenti
-* Integrazione continua
+* Requisiti **di prodotto** e **di processo**
+* Requisiti **funzionali** e **non-funzionali**
+* Proprietà emergenti -- non realizzabili da un singolo componente 
+* I requisiti dovrebbero essere **quantificabili**
+* Requisiti **relativi al sistema** e **relativi al software**
 
 #### La costruzione del software
-
+  
 E' l'attività centrale dello sviluppo del software. Fanno parte della costruzione le sotto-attività:
 
 * Architettura del software
@@ -177,16 +204,165 @@ Metafora: la costruzione di un edificio
 * La pianificazione, il progetto, e il controllo qualità possono essere visti a **livelli differenti**
 * A seconda del contesto e dai requisiti, diversi approcci di costruzioni possono essere usati (zona sismica? zona franosa? zona di montagna?)
 
+#### Pratiche comuni
+
+* Sviluppo collaborativo: team e ruoli
+* Controllo di versione
+* Automazione della build
+* Test di regressione automatici
+* Generazione della documentazione dai commenti
+* Integrazione continua
+
+### Paradigmi di programmazione
+
+[Programming paradigms](https://en.wikipedia.org/wiki/Programming_paradigm) ([Ita](https://it.wikipedia.org/wiki/Paradigma_di_programmazione))
+
+Principali paradigmi di interesse in questo corso:
+
+* **Programmazione imperativa**
+    - Ispirazione: architettura di von Neumann
+    - Ispirazione "tecnologica"
+* **Programmazione funzionale**
+    - Concetto chiave: la funzione matematica e la sua applicazione
+    - Ispirazione "teorica"
+* **Programmazione a oggetti**
+    - Concetti chiave: modellazione del mondo reale, oggetti, interazione fra oggetti via scambio di messaggi
+    - Pilastri fondamentali: incapsulamento, ereditarietà, polimorfismo
+
+Altri paradigmi comunemente riferiti in discorsi circa la programmazione (NOTA: le demarcazioni non sono nette; paradigmi diversi possono coesistere; alcuni paradigmi possono condividere parte delle idee di base)
+
+* Programmazione strutturata
+    - Teorema della programmazione strutturata: sequenza, selezione (branch), iterazione
+    - Critica al "go-to"
+    - Elementi: strutture di controllo, subroutine (procedure, funzioni, ...), blocchi
+* Programmazione modulare
+    - Concetti chiave: modulo, interfaccia
+* Programmazione procedurale
+    - Concetto chiave: chiamata a procedura
+    - Spesso sinonimo di programmazione imperativa
+* Programmazione dichiarativa
+    - Esprime la logica di computazione senza specificare il flusso di controllo
+* Programmazione logica
+    - I programmi consistono in fatti e regole
+    - L'elaborazione avviene mediante un processo deduttivo di verifica di ipotesi
+
+Linguaggi multi-paradigma
+
+* Principalmente: programmazione imperativa, a oggetti, funzionale
+
+### JavaScript
+
+#### Introduzione a JavaScript
+
+- Cos'è JavaScript
+- Possibile riferimento: http://www.html.it/guide/guida-javascript-di-base/
+- Perché è stato scelto come linguaggio per questo corso introduttivo sulla programmazione
+- Storia ed evoluzione del linguaggio: ECMAScript, AJAX, librerie, utilizzo server-side, evoluzione tecnica (ES6)
+- Popolarità e ruolo nello sviluppo Web moderno
+
+#### I primi passi: ambiente di lavoro ed esecuzione di script
+
+- Gli strumenti di lavoro: editor, interprete/compilatore (engine), debugger
+- Strumenti di sviluppo nei browser: console (*REPL: Read Evaluate Print Loop*)
+- Utilizzo di JavaScript in pagine HTML
+    - Inline su attributi HTML
+    - Blocchi di codice nella pagina
+    - Inclusione di script JavaScript
+    
+#### Esperimenti iniziali
+
+Prompt e alert
+
+```javascript
+var nome = window.prompt("Qual è il tuo nome?", "Default");
+alert("Benvenuto, " + nome);
+```
+
+Scrittura sulla pagina
+
+```javascript
+document.write("Hello world");
+```
+
+Output a console
+
+```javascript
+console.log("Hello world");
+```
+
+#### Esecuzione di codice JavaScript al caricamento della pagina
+
+**Modalità 1**
+```html
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Test</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <script type="text/javascript">
+        function entryPoint() {
+            alert('Hello');
+        }
+        </script>
+    </head>
+    <body onload="entryPoint();">
+    </body>
+</html>
+```
+
+**Modalità 2**
+```javascript
+function entryPoint() {
+  alert('Hello');
+}
+window.onload = entryPoint;
+```
+
+**Modalità 3**
+```javascript
+document.addEventListener('DOMContentLoaded', function() {
+    alert("Hello");
+}, false);
+```
+
+* Digressione: cos'è il [Document Object Model (DOM)](https://en.wikipedia.org/wiki/Document_Object_Model) ([Ita](https://it.wikipedia.org/wiki/Document_Object_Model))
+* Digressione: evento `onload` ed evento `DOMContentLoaded`
+    - _The DOMContentLoaded event is fired when the initial HTML document has been completely loaded and parsed, without waiting for stylesheets, images, and subframes to finish loading. A very different event load should be used only to detect a fully-loaded page_ (https://developer.mozilla.org/en-US/docs/Web/Events/DOMContentLoaded)
+
+**Modalità 4** (posizionamento alla fine del codice di markup)
+
+```html
+<html>
+...
+</html>
+<script>
+alert("Hello")
+</script>
+```
+
+**Modalità 5** (differimento del caricamento di script)
+
+```html
+<script src="file.js" defer></script>
+```
+
+**Modalità 6** (JQuery)
+
+```javascript
+$(document).ready(function(){
+   alert("Hello");
+});
+```
+
+* Digressione: il problema della **compatibilità dei browser**
+
 <a name="lezione-yy01"></a>
 
 ------------------------------------
 
-## Lezione 2: yy/11/2017
+## Lezione 2: 27/11/2017
 
-Sommario
-
-* X
-* Y
+TO-DO
 
 -----------------------------------------
 
@@ -207,7 +383,7 @@ Outline commentato ed espanso
 1. ECMAScript6 e il supporto dei browser
     - Transpiler: TypeScript, Traceur, Babel
 1. JS e HTML, librerie e codice JavaScript esterno
-    - Inserire codice JS in una pagina HTML: inline su attributi HTML, blocchi di codice nella pagina con, JavaScript esterno
+    - Inserire codice JS in una pagina HTML: inline su attributi HTML, blocchi di codice nella pagina, inclusione di script
 1. Commenti, punti e virgola e maiuscola
     - Punto e virgola è opzionale ma buona pratica usarlo
     - Case-sensitiveness
