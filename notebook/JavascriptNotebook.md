@@ -360,15 +360,15 @@ $(document).ready(function(){
 
 ------------------------------------
 
-## Lezione 2: 27/11/2017
+# Lezione 2: 27/11/2017
 
 TO-DO
 
 -----------------------------------------
 
-## Risorse
+# Risorse
 
-### Html.it: Guida JavaScript di Base
+## Html.it: Guida JavaScript di Base
 
 http://www.html.it/guide/guida-javascript-di-base/
 
