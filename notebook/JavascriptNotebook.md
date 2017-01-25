@@ -13,7 +13,7 @@ Pagine relative alle lezioni:
 
 ---------------------------------------------------------
 
-## Lezione 1:  26/01/2017
+# Lezione 1:  26/01/2017
 
 Sommario
 
@@ -21,7 +21,7 @@ Sommario
 * Introduzione al modulo
 * Rudimenti di ingegneria del software
 
-### i) Presentazioni
+## i) Presentazioni
 
 * **Chi sono**: Roberto Casadei, dottorando in Computer Science & Engineering all'Università di Bologna 
 * **Chi siete?**
@@ -36,22 +36,22 @@ Corso di introduzione alla programmazione
 
 * Pragmatico, operativo, abilitante, di base
 
-#### Obiettivi
+### Obiettivi
 
 * Alla fine del modulo, si è in grado di comprendere e scrivere piccoli programmi, già orientati a contesti applicativi specifici (ad es. web)
 
-#### Modalità
+### Modalità
 
 * Teoria minimale e approccio pratico
 
-#### Contenuti: panoramica
+### Contenuti: panoramica
 
 * Rudimenti: software e programmazione
 * Impostazione di un ambiente per lo sviluppo e l'esecuzione di programmi
 * **Basi della programmazione in JavaScript**
 * Da JavaScript a Java/C#: cenni
 
-#### Risorse
+### Risorse
 
 Risorse utilizzate in questo modulo:
 
@@ -72,7 +72,7 @@ Risorse per esercizi:
 * http://eloquentjavascript.net/code/
 * http://www.w3resource.com/javascript-exercises/
 
-#### Consigli
+### Consigli
 
 * La programmazione (così come una lingua) non si impara a lezione, né sui libri: si impara mettendo in pratica, sperimentando, e utilizzando un approccio (pro)attivo
     - Prendere appunti
@@ -101,14 +101,14 @@ Risorse per esercizi:
 
 1. Sulla tipizzazione dei linguaggi 
 
-### Rudimenti di ingegneria del software
+## Rudimenti di ingegneria del software
 
 Prerequisiti
 
 * Cos'è il software?
 * Come si realizza il software?
 
-#### Principi e concetti
+### Principi e concetti
 
 * **Ingegneria del software come disciplina**: principi, metodologie, tecnologie per migliorare il processo di sviluppo del software, rapportando conoscenza e strumenti in modo sistematico.
 * **L'idea**: il prodotto software deve risultare da un **processo** ben definito.
@@ -119,7 +119,7 @@ Prerequisiti
     - Complessità essenziale vs. complessità accidentale
 * Tracciabilità
 
-#### Le fasi dello sviluppo del software
+### Le fasi dello sviluppo del software
 
 Dove iniziano i progetti software?
 
@@ -154,7 +154,7 @@ Progetti software
 9. Deployment
 10. Manutenzione
 
-#### Modelli di ciclo di vita di sviluppo del software 
+### Modelli di ciclo di vita di sviluppo del software 
   
 [Software Development Approaches](https://en.wikipedia.org/wiki/Software_development_process#Approaches) ([Ita](https://it.wikipedia.org/wiki/Ciclo_di_vita_del_software#Processi_di_sviluppo_software))
 
@@ -162,7 +162,7 @@ Progetti software
 * [Spiral model](https://en.wikipedia.org/wiki/Spiral_model) ([Ita](https://it.wikipedia.org/wiki/Modello_a_spirale))
     - Pianificazione, Analisi dei rischi, Sviluppo, Verifica
     
-#### Metodologie di sviluppo del software
+### Metodologie di sviluppo del software
 
 * Classica
 * [Agile](https://en.wikipedia.org/wiki/Agile_software_development) ([Ita](https://it.wikipedia.org/wiki/Metodologia_agile))
@@ -171,7 +171,7 @@ Progetti software
     - Sotto-metodologie: XP
     - Framework di processo: Scrum
 
-#### A proposito dei requisiti
+### A proposito dei requisiti
 
 * Requisiti **di prodotto** e **di processo**
 * Requisiti **funzionali** e **non-funzionali**
@@ -179,7 +179,7 @@ Progetti software
 * I requisiti dovrebbero essere **quantificabili**
 * Requisiti **relativi al sistema** e **relativi al software**
 
-#### La costruzione del software
+### La costruzione del software
   
 E' l'attività centrale dello sviluppo del software. Fanno parte della costruzione le sotto-attività:
 
@@ -204,7 +204,7 @@ Metafora: la costruzione di un edificio
 * La pianificazione, il progetto, e il controllo qualità possono essere visti a **livelli differenti**
 * A seconda del contesto e dai requisiti, diversi approcci di costruzioni possono essere usati (zona sismica? zona franosa? zona di montagna?)
 
-#### Pratiche comuni
+### Pratiche comuni
 
 * Sviluppo collaborativo: team e ruoli
 * Controllo di versione
@@ -213,7 +213,7 @@ Metafora: la costruzione di un edificio
 * Generazione della documentazione dai commenti
 * Integrazione continua
 
-### Paradigmi di programmazione
+## Paradigmi di programmazione
 
 [Programming paradigms](https://en.wikipedia.org/wiki/Programming_paradigm) ([Ita](https://it.wikipedia.org/wiki/Paradigma_di_programmazione))
 
@@ -250,9 +250,9 @@ Linguaggi multi-paradigma
 
 * Principalmente: programmazione imperativa, a oggetti, funzionale
 
-### JavaScript
+## JavaScript
 
-#### Introduzione a JavaScript
+### Introduzione a JavaScript
 
 - Cos'è JavaScript
 - Possibile riferimento: http://www.html.it/guide/guida-javascript-di-base/
@@ -260,7 +260,7 @@ Linguaggi multi-paradigma
 - Storia ed evoluzione del linguaggio: ECMAScript, AJAX, librerie, utilizzo server-side, evoluzione tecnica (ES6)
 - Popolarità e ruolo nello sviluppo Web moderno
 
-#### I primi passi: ambiente di lavoro ed esecuzione di script
+### I primi passi: ambiente di lavoro ed esecuzione di script
 
 - Gli strumenti di lavoro: editor, interprete/compilatore (engine), debugger
 - Strumenti di sviluppo nei browser: console (*REPL: Read Evaluate Print Loop*)
@@ -269,7 +269,7 @@ Linguaggi multi-paradigma
     - Blocchi di codice nella pagina
     - Inclusione di script JavaScript
     
-#### Esperimenti iniziali
+### Esperimenti iniziali
 
 Prompt e alert
 
@@ -290,7 +290,7 @@ Output a console
 console.log("Hello world");
 ```
 
-#### Esecuzione di codice JavaScript al caricamento della pagina
+### Esecuzione di codice JavaScript al caricamento della pagina
 
 **Modalità 1**
 ```html
