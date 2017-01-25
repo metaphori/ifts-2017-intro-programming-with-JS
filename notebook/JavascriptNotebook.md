@@ -7,8 +7,6 @@ Pagine relative alle lezioni:
 
 1. [Lezione 26/01/2017](#lezione-xx01)
 
-# Lezioni
-
 <a name="lezione-xx01"></a>
 
 ---------------------------------------------------------
@@ -293,6 +291,7 @@ console.log("Hello world");
 ### Esecuzione di codice JavaScript al caricamento della pagina
 
 **Modalità 1**
+
 ```html
 <!DOCTYPE html>
 <html>
@@ -311,6 +310,7 @@ console.log("Hello world");
 ```
 
 **Modalità 2**
+
 ```javascript
 function entryPoint() {
   alert('Hello');
@@ -319,6 +319,7 @@ window.onload = entryPoint;
 ```
 
 **Modalità 3**
+
 ```javascript
 document.addEventListener('DOMContentLoaded', function() {
     alert("Hello");
