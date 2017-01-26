@@ -250,6 +250,42 @@ Linguaggi multi-paradigma
 
 * Principalmente: programmazione imperativa, a oggetti, funzionale
 
+Esempio:
+
+```prolog
+% LOGICO
+max([X],X).
+max([X|Xs],X):- max(Xs,Y), X >=Y.
+max([X|Xs],N):- max(Xs,N), N > X.
+```
+
+```Scala
+// IMPERATIVO/PROCEDURALE
+def max(lst: List[Int]): Int = {
+  assert(lst.size>0, "La lista non può essere vuota")
+  var currMax = lst.head
+  for(x <- lst.tail){
+    if(x > currMax) currMax = x;
+  }
+  return currMax
+}
+```
+
+```Scala
+// FUNZIONALE
+def max(lst: List[Int]): Int = 
+  lst.reduce((max,curr) => if(curr>max) curr else max)
+```
+
+```Scala
+// ORIENTATO AGLI OGGETTI
+class Lista(val nums: Int*){
+  def max = nums.max
+}
+new Lista(4,7,1).max
+```
+
+
 ### JavaScript
 
 #### Introduzione a JavaScript
