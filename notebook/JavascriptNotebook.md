@@ -15,6 +15,8 @@ Pagine relative alle lezioni:
 
 ## Lezione 1:  26/01/2017
 
+**Comunicazione di servizio**: Pianini ha pubblicato, nel sito del modulo precedente, un testo di esame con cui potrete esercitatvi.
+
 Sommario
 
 * Presentazioni
@@ -291,6 +293,7 @@ new Lista(4,7,1).max
 #### Introduzione a JavaScript
 
 - Cos'è JavaScript
+    - Da non confondersi con Java
 - Possibile riferimento: http://www.html.it/guide/guida-javascript-di-base/
 - Perché è stato scelto come linguaggio per questo corso introduttivo sulla programmazione
 - Storia ed evoluzione del linguaggio: ECMAScript, AJAX, librerie, utilizzo server-side, evoluzione tecnica (ES6)
@@ -395,13 +398,129 @@ $(document).ready(function(){
 
 * Digressione: il problema della **compatibilità dei browser**
 
+#### Esercizio di comprensione: qual è l'output nella pagina?
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+
+<script>
+  
+function write(msg){
+  var div = document.getElementById("content");
+  if(div == null) return;
+  div.innerHTML = div.innerHTML + msg + "<br />";
+}
+  
+window.onload = function(){ write("Onload"); };
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM loaded");
+    write("DOM loaded");
+}, false);
+
+write("Scrivo sul documento");
+
+</script>
+
+</head>
+<body>
+
+<script>
+  write("Messaggio1");
+</script>
+  
+  <div id="content"></div>
+  
+<script>
+  write("Messaggio2");
+</script>  
+
+</body>
+</html>
+```
+
 <a name="lezione-yy01"></a>
 
 ------------------------------------
 
 ## Lezione 2: 27/11/2017
 
-TO-DO
+Sommario
+
+* Verifica di asserzioni, testing
+
+### Verifica di assunzioni in [JasmineJS](https://jasmine.github.io/)
+
+Esempio
+
+```javascript
+<html>
+
+<head>
+
+<link rel="shortcut icon" type="image/png" href="jasmine-lib/lib/jasmine-2.5.2/jasmine_favicon.png">
+<link rel="stylesheet" type="text/css" href="jasmine-lib/lib/jasmine-2.5.2/jasmine.css">
+
+<script type="text/javascript" src="jasmine-lib/lib/jasmine-2.5.2/jasmine.js"></script>
+<script type="text/javascript" src="jasmine-lib/lib/jasmine-2.5.2/jasmine-html.js"></script>
+<script type="text/javascript" src="jasmine-lib/lib/jasmine-2.5.2/boot.js"></script>
+
+</head>
+<body>
+
+<script>
+
+describe("Truthiness in JavaScript", function() {
+
+  it("Falsy values: 0, \"\", null, undefined, NaN", function() {
+    expect(0         ? 1 : 2).toBe(2);
+    expect(""        ? 1 : 2).toBe(2);
+    expect(null      ? 1 : 2).toBe(2);
+    expect(undefined ? 1 : 2).toBe(2);
+    expect(NaN       ? 1 : 2).toBe(2);
+    
+    // The mechanism behind Falsy values is ToBoolean, which is invoked in negation, ternary op, IF construct
+    expect(!undefined).toBe(true);
+    expect(!null).toBe(true);
+    expect(!"").toBe(true);
+    expect(!NaN).toBe(true);
+    expect(!0).toBe(true);
+  });
+  
+  it("Falsy values and comparison", function(){
+    expect(false == "" && ''==-0 ).toBe(true);
+    expect(undefined==null && null==undefined).toBe(true);
+    expect(NaN == NaN).not.toBe(true); // !!!
+    
+    expect(NaN == undefined || NaN == null || NaN == false || NaN == 0).toBe(false);
+    expect(null == 0 || null == "" || null == false).toBe(false);
+    expect(undefined == 0 || undefined == "" || undefined == false).toBe(false);
+    
+    // it is possible for a value to be truthy (ToBoolean returns true), but also == false
+    expect( "0" && "0"==false ? 1 : 2).toBe(1); // !!!
+    expect( new Boolean(false) && new Boolean(false)==false ? 1 : 2).toBe(1);
+    expect( [] && []==false ? 1 : 2).toBe(1);
+  });
+
+  it("True values", function(){
+    expect(1   ? 1 : 2).toBe(1);
+    expect(" " ? 1 : 2).toBe(1);
+  });
+});
+
+</script>
+
+
+</body>
+</html>
+```
+
+Digressione
+
+* [Test-Driven Development](https://en.wikipedia.org/wiki/Test-driven_development) ([Ita](https://it.wikipedia.org/wiki/Test_driven_development))
+* [Behavior-Driven Development](https://en.wikipedia.org/wiki/Behavior-driven_development) ([Ita](https://it.wikipedia.org/wiki/Behavior-driven_development))
 
 -----------------------------------------
 
