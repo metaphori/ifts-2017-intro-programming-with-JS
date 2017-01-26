@@ -22,6 +22,8 @@ Sommario
 * Presentazioni
 * Introduzione al modulo
 * Rudimenti di ingegneria del software
+* Paradigmi di programmazione
+* Presentazione di JavaScript
 
 ### i) Presentazioni
 
@@ -31,6 +33,7 @@ Sommario
     - Esperienza con la programmazione
     - Esperienza con linguaggi imperativi/object-oriented
     - Esperienza con JavaScript
+* Descrizione di questo sito.
 
 ### ii) Descrizione modulo (prima parte)
 
@@ -82,6 +85,12 @@ Risorse per esercizi:
 * In caso di dubbi, fate domande: potrebbero servire a tutti
 
 ### iii) Programma
+
+Note: 
+
+* Potrebbe essere soggetto a variazione.
+* I vari punti potrebbero avere pesi diversi relativamente al numero di ore di lezione.
+* L'idea è di mantenere una certa flessibilità per quanto riguarda contenuti e modalità di erogazione.
 
 #### Parte 0: Introduzione e contestualizzazione
 
