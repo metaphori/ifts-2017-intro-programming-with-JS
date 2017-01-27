@@ -5,8 +5,9 @@ Questo "quaderno" è un supporto per questo modulo IFTS di introduzione alla pro
 
 Pagine relative alle lezioni:
 
-1. [Lezione 27/01/2017](#lezione-2701)
-1. [Lezione 26/01/2017](#lezione-2601)
+* **[Lezione 30/01/2017](#lezione-3001)**
+* [Lezione 27/01/2017](#lezione-2701)
+* [Lezione 26/01/2017](#lezione-2601) 
 
 # Lezioni
 
@@ -266,7 +267,7 @@ Linguaggi multi-paradigma
 
 ------------------------------------
 
-## Lezione 2: 27/11/2017
+## Lezione 2: 27/01/2017
 
 Sommario
 
@@ -325,6 +326,7 @@ new Lista(4,7,1).max
 #### Introduzione a JavaScript
 
 - Cos'è JavaScript
+    - Linguaggio di scripting: linguaggio di programmazione che supporta la scrittura di script, cioè programmi scritti per ambienti runtime "speciali" finalizzati all'automazione di alcune attività che potrebbero essere eseguite passo-passo da un operatore umano
     - Da non confondersi con Java
 - Possibile riferimento: http://www.html.it/guide/guida-javascript-di-base/
 - Perché è stato scelto come linguaggio per questo corso introduttivo sulla programmazione
@@ -378,7 +380,21 @@ Output a console
 console.log("Hello world");
 ```
 
-#### Esecuzione di codice JavaScript al caricamento della pagina
+<a name="lezione-3001"></a>
+
+<hr />
+
+## Lezione 3: 30/01/2017
+
+Sommario
+
+* Esecuzione di codice JavaScript al caricamento della pagina
+* Esercizio di comprensione
+* Specifiche di comportamento in JasmineJS
+    - Questo anche mostra come utilizzare librerie JavaScript esterne
+    - Oltre che essere un esempio di testing / specifica di "aspettative"
+
+### Esecuzione di codice JavaScript al caricamento della pagina
 
 **Modalità 1**
 
@@ -447,7 +463,7 @@ $(document).ready(function(){
 
 * Digressione: il problema della **compatibilità dei browser**
 
-#### Esercizio di comprensione: qual è l'output nella pagina?
+### Esercizio di comprensione: qual è l'output nella pagina?
 
 ```html
 <!DOCTYPE html>
@@ -526,6 +542,19 @@ Digressione
 
 * [Test-Driven Development](https://en.wikipedia.org/wiki/Test-driven_development) ([Ita](https://it.wikipedia.org/wiki/Test_driven_development))
 * [Behavior-Driven Development](https://en.wikipedia.org/wiki/Behavior-driven_development) ([Ita](https://it.wikipedia.org/wiki/Behavior-driven_development))
+
+<a name="lezione-3101"></a>
+
+<hr />
+
+## Lezione 4: 31/01/2017
+
+Sommario
+
+* Commenti ed elementi sintattici di base
+* Tipi di dato in JavaScript
+* Variabili, costanti, dichiarazioni
+* Espressioni e operatori
 
 #### Commenti, punti e virgola e maiuscola
 
