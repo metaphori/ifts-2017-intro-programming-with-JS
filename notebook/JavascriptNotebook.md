@@ -5,11 +5,12 @@ Questo "quaderno" è un supporto per questo modulo IFTS di introduzione alla pro
 
 Pagine relative alle lezioni:
 
-1. [Lezione 26/01/2017](#lezione-xx01)
+1. [Lezione 27/01/2017](#lezione-2701)
+1. [Lezione 26/01/2017](#lezione-2601)
 
 # Lezioni
 
-<a name="lezione-xx01"></a>
+<a name="lezione-2601"></a>
 
 ---------------------------------------------------------
 
@@ -261,7 +262,20 @@ Linguaggi multi-paradigma
 
 * Principalmente: programmazione imperativa, a oggetti, funzionale
 
-Esempio:
+<a name="lezione-2701"></a>
+
+------------------------------------
+
+## Lezione 2: 27/11/2017
+
+Sommario
+
+* Riallacciamento lezione precedente: paradigmi di programmazione
+* Introduzione a JavaScript
+* Incorporamento di codice JavaScript in pagine HTML
+* Verifica di asserzioni, testing
+
+### Paradigmi di programmazione: esempio
 
 ```prolog
 % LOGICO
@@ -296,6 +310,15 @@ class Lista(val nums: Int*){
 new Lista(4,7,1).max
 ```
 
+### A proposito dei linguaggi di programmazione
+
+[Linguaggi di programmazione](https://en.wikipedia.org/wiki/Programming_language) ([Ita](https://it.wikipedia.org/wiki/Linguaggio_di_programmazione))
+
+* **Sintassi**
+* **Semantica**
+* **Sistema di tipi**: classificazione valori ed espressioni in tipi
+* Linguaggi general-purpose (GPL) e linguaggi domain-specific (DSL)
+* Come già indicato precedentemente, la nozione di **paradigma di programmazione** serve a classificare i linguaggi sulla base dello stile di programmazione.
 
 ### JavaScript
 
@@ -316,7 +339,24 @@ new Lista(4,7,1).max
     - Inline su attributi HTML
     - Blocchi di codice nella pagina
     - Inclusione di script JavaScript
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- INCLUSIONE SCRIPT JAVASCRIPT -->
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <script>
+    // CODICE JAVASCRIPT
+    </script>
     
+    <button onclick="alert('Hello, JS')" />
+  </body>
+</html>
+```
+
 #### Esperimenti iniziali
 
 Prompt e alert
@@ -450,16 +490,6 @@ write("Scrivo sul documento");
 </html>
 ```
 
-<a name="lezione-yy01"></a>
-
-------------------------------------
-
-## Lezione 2: 27/11/2017
-
-Sommario
-
-* Verifica di asserzioni, testing
-
 ### Verifica di assunzioni in [JasmineJS](https://jasmine.github.io/)
 
 Esempio
@@ -480,45 +510,11 @@ Esempio
 <body>
 
 <script>
-
-describe("Truthiness in JavaScript", function() {
-
-  it("Falsy values: 0, \"\", null, undefined, NaN", function() {
-    expect(0         ? 1 : 2).toBe(2);
-    expect(""        ? 1 : 2).toBe(2);
-    expect(null      ? 1 : 2).toBe(2);
-    expect(undefined ? 1 : 2).toBe(2);
-    expect(NaN       ? 1 : 2).toBe(2);
-    
-    // The mechanism behind Falsy values is ToBoolean, which is invoked in negation, ternary op, IF construct
-    expect(!undefined).toBe(true);
-    expect(!null).toBe(true);
-    expect(!"").toBe(true);
-    expect(!NaN).toBe(true);
-    expect(!0).toBe(true);
-  });
-  
-  it("Falsy values and comparison", function(){
-    expect(false == "" && ''==-0 ).toBe(true);
-    expect(undefined==null && null==undefined).toBe(true);
-    expect(NaN == NaN).not.toBe(true); // !!!
-    
-    expect(NaN == undefined || NaN == null || NaN == false || NaN == 0).toBe(false);
-    expect(null == 0 || null == "" || null == false).toBe(false);
-    expect(undefined == 0 || undefined == "" || undefined == false).toBe(false);
-    
-    // it is possible for a value to be truthy (ToBoolean returns true), but also == false
-    expect( "0" && "0"==false ? 1 : 2).toBe(1); // !!!
-    expect( new Boolean(false) && new Boolean(false)==false ? 1 : 2).toBe(1);
-    expect( [] && []==false ? 1 : 2).toBe(1);
-  });
-
-  it("True values", function(){
-    expect(1   ? 1 : 2).toBe(1);
-    expect(" " ? 1 : 2).toBe(1);
+describe("Somma fra numeri", function() {
+  it("ha proprieta' associativa", function() {
+    expect(1 + (4 + 5) === (1 + 4) + 5).toBe(true);
   });
 });
-
 </script>
 
 
@@ -530,6 +526,43 @@ Digressione
 
 * [Test-Driven Development](https://en.wikipedia.org/wiki/Test-driven_development) ([Ita](https://it.wikipedia.org/wiki/Test_driven_development))
 * [Behavior-Driven Development](https://en.wikipedia.org/wiki/Behavior-driven_development) ([Ita](https://it.wikipedia.org/wiki/Behavior-driven_development))
+
+#### Commenti, punti e virgola e maiuscola
+
+- Punto e virgola è opzionale ma buona pratica usarlo
+- Case-sensitiveness
+- Commenti: singola linea `//...`, e multilinea `/*...*/`
+    
+#### Stringhe, numeri e altri tipi di dati JavaScript
+
+- 5 tipi primitivi: numeri, stringhe, booleani, Null, Undefined
+- 1 tipo di dato complesso (oggetti) da cui derivano altri elementi (ad es. array, regexps, funzioni, ...)
+- Conversione automatica dati primitivi a oggetti wrapper
+- Stringhe: sintassi (singoli o doppi apici), escaping e caratteri speciali
+- Numeri: interi e float; internamente rappresentati tutti come floating point; `Infinity`; `NaN`
+- `null`: rappresenta nessun valore; è di tipo Null (anche se typeof riporta "object"); può essere visto come "puntatore vuoto ad oggetto" 
+- `undefined`: è il valore assegnato a una variabile che non è inizializzata 
+- Tipizzazione debole e dinamica: l'informazione di tipo è acquisita a runtime (tipizzazione dinamica), conversioni implicite fra tipi (tipizzazione debole)  
+
+#### Variabili, costanti e dichiarazioni
+
+- Con `var`; nomi validi per variabili; le variabili possono possono contenere, nel tempo, valori di tipi diversi
+- Dichiarazione implicita di variabili (senza `var`, in realtà è assegnamento di proprietà sull'oggetto globale)
+- Strict mode: da ES5, modalità meno permissiva (attivabile via `"use strict";` all'inizio di uno script o di una funziona) per ottenere errori in caso di utilizzo "poco buono" di JS
+- Costanti: dichiarabili con parola chiave `const`
+
+#### Espressioni e operatori
+
+- Espressioni: composizione di elementi la cui valutazione risulta in un valore
+- Operatori: costrutti per la combinazione di valori; possono essere unari, binari, ternari a seconda del numero di valori che ricevono
+- Operatori aritmetici: `+, -, *, /, %`; quelli unari sono negazione `-2`, incremento/decremento `x++` (notazione postfissa: "prima ritorna, poi opera"), `--x` (notazione prefissa: "prima opera, poi ritorna")
+- Operazioni relazionali: `>, >=, <, <=, ==, !=`; particolari sono `===` (strettamente uguale) e `!==` (strettamente diverso)
+- Operatori logici: `&&, ||, !`
+- Operatori bitwise: `&, |, ^, ~, <<, >>`
+- Operatore di assegnamento: `=` (restituisce il valore dell'espressione assegnata, ma non quando una variabile è dichiarata con `var`, faccenda un po' complicata: http://stackoverflow.com/questions/22844840/why-does-javascript-variable-declaration-at-console-results-in-undefined-being)
+- Operatore condizionale (o ternario): `cond ? thenExpr : elseExpr`
+- Operatori di assegnamento composti: `x += y; x /= y;` etc.
+- Concatenazione di stringhe: `"ab"+"cd" // "abcd"`
 
 -----------------------------------------
 
