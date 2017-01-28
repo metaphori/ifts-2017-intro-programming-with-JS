@@ -104,9 +104,10 @@ Note:
 
 1. Introduzione a JavaScript
 1. Tipi di dato
-1. Variabili e dichiarazioni
+1. Variabili, dichiarazioni, scope
 1. Espressioni
 1. Istruzioni di controllo
+1. Strutture dati
 1. Elementi di programmazione funzionale
 1. Elementi di programmazione orientata agli oggetti
 
@@ -545,6 +546,8 @@ describe("Somma fra numeri", function() {
 </body>
 </html>
 ```
+
+* Notare l'utilizzo di una libreria esterna
 
 Digressione
 
