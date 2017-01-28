@@ -519,7 +519,7 @@ Sommario
 
 Esempio
 
-```javascript
+```html
 <html>
 
 <head>
