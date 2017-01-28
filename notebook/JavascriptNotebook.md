@@ -388,11 +388,18 @@ console.log("Hello world");
 
 Sommario
 
+* Esercizio: esplorazione del DOM
 * Esecuzione di codice JavaScript al caricamento della pagina
 * Esercizio di comprensione
 * Specifiche di comportamento in JasmineJS
     - Questo anche mostra come utilizzare librerie JavaScript esterne
     - Oltre che essere un esempio di testing / specifica di "aspettative"
+
+### Esercizio: esplorazione del DOM
+
+* In modo "programmatico" da console
+    - Navigazione struttura gerarchica
+* Attraverso il DOM inspector presente nei Developer Tools dei browser
 
 ### Esecuzione di codice JavaScript al caricamento della pagina
 
