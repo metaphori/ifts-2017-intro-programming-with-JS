@@ -380,21 +380,6 @@ Output a console
 console.log("Hello world");
 ```
 
-<a name="lezione-3001"></a>
-
-<hr />
-
-## Lezione 3: 30/01/2017
-
-Sommario
-
-* Esercizio: esplorazione del DOM
-* Esecuzione di codice JavaScript al caricamento della pagina
-* Esercizio di comprensione
-* Specifiche di comportamento in JasmineJS
-    - Questo anche mostra come utilizzare librerie JavaScript esterne
-    - Oltre che essere un esempio di testing / specifica di "aspettative"
-
 ### Esercizio: esplorazione del DOM
 
 * In modo "programmatico" da console
@@ -513,6 +498,22 @@ write("Scrivo sul documento");
 </html>
 ```
 
+<a name="lezione-3001"></a>
+
+<hr />
+
+## Lezione 3: 30/01/2017
+
+Sommario
+
+* Specifiche di comportamento in JasmineJS
+    - Questo anche mostra come utilizzare librerie JavaScript esterne
+    - Oltre che essere un esempio di testing / specifica di "aspettative"
+* Commenti ed elementi sintattici di base
+* Tipi di dato in JavaScript
+* Variabili, costanti, dichiarazioni
+* Espressioni e operatori
+
 ### Verifica di assunzioni in [JasmineJS](https://jasmine.github.io/)
 
 Esempio
@@ -550,47 +551,45 @@ Digressione
 * [Test-Driven Development](https://en.wikipedia.org/wiki/Test-driven_development) ([Ita](https://it.wikipedia.org/wiki/Test_driven_development))
 * [Behavior-Driven Development](https://en.wikipedia.org/wiki/Behavior-driven_development) ([Ita](https://it.wikipedia.org/wiki/Behavior-driven_development))
 
-<a name="lezione-3101"></a>
-
-<hr />
-
-## Lezione 4: 31/01/2017
-
-Sommario
-
-* Commenti ed elementi sintattici di base
-* Tipi di dato in JavaScript
-* Variabili, costanti, dichiarazioni
-* Espressioni e operatori
-
 #### Commenti, punti e virgola e maiuscola
 
-- Punto e virgola è opzionale ma buona pratica usarlo
-- Case-sensitiveness
-- Commenti: singola linea `//...`, e multilinea `/*...*/`
+- **Punto e virgola** è opzionale ma buona pratica usarlo
+- **Case-sensitiveness**
+- **Commenti**: singola linea `//...`, e multilinea `/*...*/`
     
-#### Stringhe, numeri e altri tipi di dati JavaScript
+#### Tipi di dato in JavaScript
 
-- 5 tipi primitivi: numeri, stringhe, booleani, Null, Undefined
-- 1 tipo di dato complesso (oggetti) da cui derivano altri elementi (ad es. array, regexps, funzioni, ...)
-- Conversione automatica dati primitivi a oggetti wrapper
-- Stringhe: sintassi (singoli o doppi apici), escaping e caratteri speciali
-- Numeri: interi e float; internamente rappresentati tutti come floating point; `Infinity`; `NaN`
-- `null`: rappresenta nessun valore; è di tipo Null (anche se typeof riporta "object"); può essere visto come "puntatore vuoto ad oggetto" 
+- **5 tipi primitivi**: numeri, stringhe, booleani, Null, Undefined
+- E' possibile ispezionare il tipo di un valore attraverso l'operatore `typeof`
+- U tipo di dato complesso (**oggetti**) da cui derivano altri elementi (ad es. array, regexps, funzioni, ...)
+- Conversione automatica dati primitivi a **oggetti wrapper**
+- **Stringhe**: sintassi (singoli o doppi apici), escaping e caratteri speciali
+- **Numeri**: interi e float; internamente rappresentati tutti come floating point; `Infinity`; `NaN`
+- `null`: rappresenta nessun valore; è di tipo Null (anche se `typeof` riporta `"object"`); può essere visto come "puntatore vuoto ad oggetto" 
 - `undefined`: è il valore assegnato a una variabile che non è inizializzata 
 - Tipizzazione debole e dinamica: l'informazione di tipo è acquisita a runtime (tipizzazione dinamica), conversioni implicite fra tipi (tipizzazione debole)  
 
 #### Variabili, costanti e dichiarazioni
 
 - Con `var`; nomi validi per variabili; le variabili possono possono contenere, nel tempo, valori di tipi diversi
+- Oppure con `let` (ES6)
+    - *Block-scoped*, cioè, la visibilità delle variabili dichiarate in questo modo è limitata al blocco in cui sono dichiarate.
 - Dichiarazione implicita di variabili (senza `var`, in realtà è assegnamento di proprietà sull'oggetto globale)
-- Strict mode: da ES5, modalità meno permissiva (attivabile via `"use strict";` all'inizio di uno script o di una funziona) per ottenere errori in caso di utilizzo "poco buono" di JS
-- Costanti: dichiarabili con parola chiave `const`
+    - **Strict mode**: da ES5, modalità meno permissiva (attivabile via `"use strict";` all'inizio di uno script o di una funziona) per ottenere errori in caso di utilizzo "poco buono" di JS
+- **Costanti**: dichiarabili con parola chiave `const` (ES6); *block-scoped*
+
+
 
 #### Espressioni e operatori
 
-- Espressioni: composizione di elementi la cui valutazione risulta in un valore
-- Operatori: costrutti per la combinazione di valori; possono essere unari, binari, ternari a seconda del numero di valori che ricevono
+Nozioni fondamentali
+
+- **Espressioni**: composizione di elementi la cui valutazione risulta in un valore
+- **Operatori**: costrutti per la combinazione di valori; possono essere unari, binari, ternari a seconda del numero di valori (operandi) che ricevono
+- **Associatività** e **precedenza** degli operatori: [consulta reference manual](https://developer.mozilla.org/it/docs/Web/JavaScript/Reference/Operators/Operator_Precedence)
+
+Operatori 
+
 - Operatori aritmetici: `+, -, *, /, %`; quelli unari sono negazione `-2`, incremento/decremento `x++` (notazione postfissa: "prima ritorna, poi opera"), `--x` (notazione prefissa: "prima opera, poi ritorna")
 - Operazioni relazionali: `>, >=, <, <=, ==, !=`; particolari sono `===` (strettamente uguale) e `!==` (strettamente diverso)
 - Operatori logici: `&&, ||, !`
@@ -599,6 +598,38 @@ Sommario
 - Operatore condizionale (o ternario): `cond ? thenExpr : elseExpr`
 - Operatori di assegnamento composti: `x += y; x /= y;` etc.
 - Concatenazione di stringhe: `"ab"+"cd" // "abcd"`
+
+#### Conversioni tra tipi di variabili
+
+Conversioni
+
+- **Da tipo a booleano**: `undefined, null, 0, NaN, ""` vengono convertiti in `false`
+    - Nota: sui "valori falsi" le cose sono complesse (http://stackoverflow.com/questions/19839952/all-falsey-values-in-javascript)
+- **Da tipo a numero**: `undefined` -> `NaN`, `false` -> 0, `true` -> 1, `null`->0, valori stringa dipendentemente dal valori
+- **Da tipo a stringa**: i valori mantengono la rappresentazione (e.g., `NaN`->"NaN", `null`->"null", ecc.)
+
+Altre questioni collegate ai tipi
+
+- **Operatori polimorfi**: 
+    - `+` (somma numeri, concatenazione stringhe se almeno un operando è stringa), 
+    - operatori relazionali (se nessuno dei due operandi è un numero, allora viene eseguito un confronto tra stringhe, altrimenti viene eseguito un confronto tra numeri), 
+    - operatori di confronto `!=,==` (e entrambi gli operatori sono stringhe allora viene effettuato un confronto tra stringhe, altrimenti si esegue un confronto tra numeri; unica eccezione è `null == undefined` che è vera per definizione)
+- **Assegnamento condizionale**: `var x = y || ""`
+- **Uguaglianza e disuguaglianza strette**: `===` e `!==` confrontano gli operando senza effettuare alcuna conversione
+
+Consiglio:
+
+- Evitare le conversioni implicite: utilizzare conversioni esplicite (`parseInt(s), parseFloat(s)`) o la verifica di tipo (`typeof 77 == "number"`)
+
+<a name="lezione-3101"></a>
+
+<hr />
+
+## Lezione 4: 31/01/2017
+
+Sommario
+
+* Da definire
 
 -----------------------------------------
 
