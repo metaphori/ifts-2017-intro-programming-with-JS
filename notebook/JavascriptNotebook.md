@@ -5,7 +5,8 @@ Questo "quaderno" è un supporto per questo modulo IFTS di introduzione alla pro
 
 Pagine relative alle lezioni:
 
-* **[Lezione 30/01/2017](#lezione-3001)**
+* **[Lezione 31/01/2017](#lezione-3101)**
+* [Lezione 30/01/2017](#lezione-3001)
 * [Lezione 27/01/2017](#lezione-2701)
 * [Lezione 26/01/2017](#lezione-2601) 
 
@@ -605,6 +606,22 @@ Operatori
 - Operatori di assegnamento composti: `x += y; x /= y;` etc.
 - Concatenazione di stringhe: `"ab"+"cd" // "abcd"`
 
+<a name="lezione-3101"></a>
+
+<hr />
+
+## Lezione 4: 31/01/2017
+
+Sommario
+
+* Conversioni tra tipi
+* Gli array
+* `if`-`else if`-`else`
+* `switch`
+* `while` e `do..while`
+* `for`
+* `break` e `continue`
+
 #### Conversioni tra tipi di variabili
 
 Conversioni
@@ -627,15 +644,42 @@ Consiglio:
 
 - Evitare le conversioni implicite: utilizzare conversioni esplicite (`parseInt(s), parseFloat(s)`) o la verifica di tipo (`typeof 77 == "number"`)
 
-<a name="lezione-3101"></a>
+#### Definire Array in JavaScript
+    
+- La nozione di **array** (in JavaScript): collezione eterogenea di elementi indicizzati (0-indexed)
+- Sintassi: definizione letterale `[e1,e2,...,eN]`
+- Array multidimensionali `[[e11,e12], [e21,e22,[e231]]]`
+- Destrutturazione dell'assegnamento (da ES6)
 
-<hr />
+#### `if`, istruzioni condizionali e blocchi di codice
+    
+- L'`if` fa parte dei **costrutti/strutture di controllo del flusso** (https://it.wikipedia.org/wiki/Struttura_di_controllo)
+- Approfondimento: programmazione imperativa (https://it.wikipedia.org/wiki/Programmazione_imperativa), programmazione strutturata (https://it.wikipedia.org/wiki/Programmazione_strutturata)
+- Blocchi di codice: insiemi di istruzioni racchiusi tra parentesi graffe
+- `if(c){ t }`
+- `if(c){ t } else { e }`
+- `if(c){ t1 } else if(c2){ t2 } else { e }` (esprimibile con if-else annidati)
 
-## Lezione 4: 31/01/2017
+#### If-else e switch-case, combinare più condizioni
 
-Sommario
+- Switch: `switch(c){ case e1: ...; break; case e2: ...; break; default: ... }`
+    
+#### While e do-while, le iterazioni di base
+    
+- `while(c){ ... }`
+- `do { ... } while(c);`
 
-* Da definire
+#### I cicli for
+    
+- `for(init; cond; mod){ ... }`
+- Inizializzazioni multiple o vuote
+- `for-in`: per iterare sulle proprietà iterabili di oggetti
+- `for-of`: nuovo modo (ES6) per iterare su oggetti iterabili, basato sulla proprietà interna [Symbol.iterator]
+
+#### Ancora sui cicli
+
+- `break`
+- `continue`
 
 -----------------------------------------
 
