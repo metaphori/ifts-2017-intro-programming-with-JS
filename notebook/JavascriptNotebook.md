@@ -555,6 +555,8 @@ Digressione
 * [Test-Driven Development](https://en.wikipedia.org/wiki/Test-driven_development) ([Ita](https://it.wikipedia.org/wiki/Test_driven_development))
 * [Behavior-Driven Development](https://en.wikipedia.org/wiki/Behavior-driven_development) ([Ita](https://it.wikipedia.org/wiki/Behavior-driven_development))
 
+### Primi passi con JavaScript
+
 #### Commenti, punti e virgola e maiuscola
 
 - **Punto e virgola** è opzionale ma buona pratica usarlo
@@ -622,6 +624,8 @@ Sommario
 * `for`
 * `break` e `continue`
 
+### Ancora sui tipi
+
 #### Conversioni tra tipi di variabili
 
 Conversioni
@@ -644,12 +648,14 @@ Consiglio:
 
 - Evitare le conversioni implicite: utilizzare conversioni esplicite (`parseInt(s), parseFloat(s)`) o la verifica di tipo (`typeof 77 == "number"`)
 
-#### Definire Array in JavaScript
+### Array in JavaScript
     
 - La nozione di **array** (in JavaScript): collezione eterogenea di elementi indicizzati (0-indexed)
 - Sintassi: definizione letterale `[e1,e2,...,eN]`
 - Array multidimensionali `[[e11,e12], [e21,e22,[e231]]]`
 - Destrutturazione dell'assegnamento (da ES6)
+
+### Strutture di controllo del flusso
 
 #### `if`, istruzioni condizionali e blocchi di codice
     
