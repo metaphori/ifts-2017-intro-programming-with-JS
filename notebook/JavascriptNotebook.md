@@ -559,18 +559,6 @@ Digressione
 - **Punto e virgola** è opzionale ma buona pratica usarlo
 - **Case-sensitiveness**
 - **Commenti**: singola linea `//...`, e multilinea `/*...*/`
-    
-#### Tipi di dato in JavaScript
-
-- **5 tipi primitivi**: numeri, stringhe, booleani, Null, Undefined
-- E' possibile ispezionare il tipo di un valore attraverso l'operatore `typeof`
-- U tipo di dato complesso (**oggetti**) da cui derivano altri elementi (ad es. array, regexps, funzioni, ...)
-- Conversione automatica dati primitivi a **oggetti wrapper**
-- **Stringhe**: sintassi (singoli o doppi apici), escaping e caratteri speciali
-- **Numeri**: interi e float; internamente rappresentati tutti come floating point; `Infinity`; `NaN`
-- `null`: rappresenta nessun valore; è di tipo Null (anche se `typeof` riporta `"object"`); può essere visto come "puntatore vuoto ad oggetto" 
-- `undefined`: è il valore assegnato a una variabile che non è inizializzata 
-- Tipizzazione debole e dinamica: l'informazione di tipo è acquisita a runtime (tipizzazione dinamica), conversioni implicite fra tipi (tipizzazione debole)  
 
 #### Variabili, costanti e dichiarazioni
 
@@ -581,7 +569,22 @@ Digressione
     - **Strict mode**: da ES5, modalità meno permissiva (attivabile via `"use strict";` all'inizio di uno script o di una funziona) per ottenere errori in caso di utilizzo "poco buono" di JS
 - **Costanti**: dichiarabili con parola chiave `const` (ES6); *block-scoped*
 
+#### Tipi di dato in JavaScript
 
+- La nozione di **tipo**
+- **Tipi primitivi** (gestiti "per valore") e **tipi riferimento** (gestiti "per riferimento").
+    - I valori primitivi sono memorizzati direttamente nella variabile.
+    - I valori riferimento (oggetti) sono memorizzati nella variabile come puntatori a oggetti in memoria.
+- **5 tipi primitivi**: numeri, stringhe, booleani, Null, Undefined
+- Tutti i tipi primitivi hanno **rappresentazioni letterali** dei loro valori.
+- E' possibile ispezionare il tipo di un valore attraverso l'operatore `typeof`
+- Un tipo di dato complesso (**oggetti**) da cui derivano altri elementi (ad es. array, regexps, funzioni, ...)
+- Conversione automatica dati primitivi a **oggetti wrapper**
+- **Stringhe**: sintassi (singoli o doppi apici), escaping e caratteri speciali
+- **Numeri**: interi e float; internamente rappresentati tutti come floating point; `Infinity`; `NaN`
+- `null`: rappresenta nessun valore; è di tipo Null (anche se `typeof` riporta `"object"`); può essere visto come "puntatore vuoto ad oggetto" 
+- `undefined`: è il valore assegnato a una variabile che non è inizializzata 
+- Tipizzazione debole e dinamica: l'informazione di tipo è acquisita a runtime (tipizzazione dinamica), conversioni implicite fra tipi (tipizzazione debole)  
 
 #### Espressioni e operatori
 
