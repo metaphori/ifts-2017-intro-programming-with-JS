@@ -5,10 +5,11 @@ Questo "quaderno" è un supporto per questo modulo IFTS di introduzione alla pro
 
 Pagine relative alle lezioni:
 
-* **[Lezione 31/01/2017](#lezione-3101)**
-* [Lezione 30/01/2017](#lezione-3001)
-* [Lezione 27/01/2017](#lezione-2701)
-* [Lezione 26/01/2017](#lezione-2601) 
+* **[Lezione 01/02/2017](#lezione-0102)**, 5, 20/60
+* [Lezione 31/01/2017](#lezione-3101), 4, 16/60
+* [Lezione 30/01/2017](#lezione-3001), 3, 12/60
+* [Lezione 27/01/2017](#lezione-2701), 2, 8/60
+* [Lezione 26/01/2017](#lezione-2601), 1, 4/60
 
 # Lezioni
 
@@ -653,6 +654,7 @@ Consiglio:
 - La nozione di **array** (in JavaScript): collezione eterogenea di elementi indicizzati (0-indexed)
 - Sintassi: definizione letterale `[e1,e2,...,eN]`
 - Array multidimensionali `[[e11,e12], [e21,e22,[e231]]]`
+- Proprietà `length` restituisce il numero di elementi dell'array
 - Destrutturazione dell'assegnamento (da ES6)
 
 ### Strutture di controllo del flusso
@@ -684,8 +686,60 @@ Consiglio:
 
 #### Ancora sui cicli
 
-- `break`
-- `continue`
+- `break`: interrompe il ciclo
+- `continue`: termina l'iterazione corrente e continua l'esecuzione del ciclo dalla prossima iterazione
+
+<a name="lezione-0102"></a>
+
+<hr />
+
+## Lezione 5: 01/02/2017
+
+Sommario
+
+* Funzioni
+* Esercizi 
+
+### Funzioni in JavaScript: i fondamentali
+
+- **Definizione**: `function f(parameters){ body }`
+- **Invocazione** `f(arguments)`
+- Istruzione `return` specifica il **valore di ritorno**
+    - `return` vuota o non specificata: la funzione ritorna valore `undefined`
+- **Parametri (formali)** e **argomenti** (parametri attuali) di funzioni; concetto di "**arità**"
+- Flessibilità invocazione di funzione rispetto al numero di parametri forniti
+- L'array `arguments` tiene traccia degli argomenti con cui la funzione è stata invocata
+- Argomenti con valori di default (ES6)
+- Da ES6: "rest parameter" `function(a,...r){ }` e operatore di "spread" `f(...[1,2,3])`
+- Le funzioni sono **oggetti "di prima classe"**; cioè, le posso assegnare a variabili, passare ad altre funzioni come argomenti, ritornarle come valori da funzioni etc.
+- **Funzioni anonime**: ad es. `function(x,y){ return x+y; } // notare che non c'è nome`
+- **Funzioni ricorsive**: funzioni che chiamano se stesse
+    - Occorre un "caso base" che faccia terminare la ricorsione
+
+### Esercizi
+
+Esercizi semplici
+
+* Conteggio delle occorrenze di un valore in un array: `howMany([2,5,2,1,2], 2) // 3`
+* Funzione per appendere o prependere un elemento a un array
+    - `append([4,1], 7) // [4,1,7]`
+    - `prepend([4,1], 7) // [7,4,1]`
+* Inversione degli elementi in un array: `reverse([3,7,1]) // [1,7,3]`
+* Funzione che somma tutti i parametri numerici forniti: `somma(1,4,2,3) // 10`, `somma(1,"xxx",2) // 3`
+    - Nota: occorre utilizzare `arguments` per gestire un qualsiasi numero di argomenti
+    - Consiglio: utilizzare l'operatore `typeof` per controllare i tipi degli argomenti
+
+Funzioni ricorsive
+
+* Fattoriale di un numero: `n! = n*(n-1)*(n-2)*...*1`
+* Serie di Fibonacci: `0,1,1,2,3,5,8,13,21,34,...`
+
+Funzioni "higher-order"
+
+* `map([1,2,3], function(i){ return i+1; }) // [2,3,4]`
+    - `map` applica la funzione fornita come secondo parametro a tutti gli elementi della lista fornita come primo parametro
+* `filter([1,2,3,4,5], function(n){ return n%2==0; }) // [2,4]`
+    - Filtra gli elementi della lista sulla base della funzione fornita
 
 -----------------------------------------
 
