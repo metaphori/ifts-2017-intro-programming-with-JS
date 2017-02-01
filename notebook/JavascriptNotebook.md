@@ -713,13 +713,12 @@ Sommario
 - Da ES6: "rest parameter" `function(a,...r){ }` e operatore di "spread" `f(...[1,2,3])`
 - Le funzioni sono **oggetti "di prima classe"**; cioè, le posso assegnare a variabili, passare ad altre funzioni come argomenti, ritornarle come valori da funzioni etc.
 - **Funzioni anonime**: ad es. `function(x,y){ return x+y; } // notare che non c'è nome`
-- **Funzioni ricorsive**: funzioni che chiamano se stesse
-    - Occorre un "caso base" che faccia terminare la ricorsione
 
 ### Esercizi
 
 Esercizi semplici
 
+* Fattoriale di un numero in versione iterativa: `n! = n*(n-1)*(n-2)*...*1`
 * Conteggio delle occorrenze di un valore in un array: `howMany([2,5,2,1,2], 2) // 3`
 * Funzione per appendere o prependere un elemento a un array
     - `append([4,1], 7) // [4,1,7]`
@@ -729,9 +728,33 @@ Esercizi semplici
     - Nota: occorre utilizzare `arguments` per gestire un qualsiasi numero di argomenti
     - Consiglio: utilizzare l'operatore `typeof` per controllare i tipi degli argomenti
 
+<a name="lezione-0202"></a>
+
+<hr />
+
+## Lezione 6: 02/02/2017
+
+Sommario
+
+* Consolidamento
+* Esercizi 
+
+### Ancora sulle funzioni
+
+**Funzioni ricorsive**: funzioni che chiamano se stesse
+
+- Occorre un "caso base" che faccia terminare la ricorsione
+
+**Funzioni "di ordine superiore" (higher-order)**: funzioni che manipolano altre funzioni.
+
+- Funzioni che accettano altre funzioni come variabili
+- Funzioni che ritornano altre funzioni come valore di output
+
+### Esercizi
+
 Funzioni ricorsive
 
-* Fattoriale di un numero: `n! = n*(n-1)*(n-2)*...*1`
+* Fattoriale di un numero in versione ricorsiva: `n! = n*(n-1)*(n-2)*...*1`
 * Serie di Fibonacci: `0,1,1,2,3,5,8,13,21,34,...`
 
 Funzioni "higher-order"
