@@ -5,11 +5,12 @@ Questo "quaderno" è un supporto per questo modulo IFTS di introduzione alla pro
 
 Pagine relative alle lezioni:
 
-* **[Lezione 01/02/2017](#lezione-0102)**, 5, 20/60
-* [Lezione 31/01/2017](#lezione-3101), 4, 16/60
-* [Lezione 30/01/2017](#lezione-3001), 3, 12/60
-* [Lezione 27/01/2017](#lezione-2701), 2, 8/60
-* [Lezione 26/01/2017](#lezione-2601), 1, 4/60
+* **[Lezione 02/02/2017](#lezione-0202)**, 6, 24/60 - Funzioni; pseudocodice; consolidamento generale
+* [Lezione 01/02/2017](#lezione-0102), 5, 20/60 - Funzioni: le basi
+* [Lezione 31/01/2017](#lezione-3101), 4, 16/60 - Array; strutture di controllo del flusso
+* [Lezione 30/01/2017](#lezione-3001), 3, 12/60 - Specifiche sw; primi elementi in JS (tipi, var, espressioni)
+* [Lezione 27/01/2017](#lezione-2701), 2, 08/60 - Intro ai linguaggi; embedding JS in HTML
+* [Lezione 26/01/2017](#lezione-2601), 1, 04/60 - Intro al modulo; ing. del sw
 
 # Lezioni
 
@@ -706,11 +707,15 @@ Sommario
 - **Invocazione** `f(arguments)`
 - Istruzione `return` specifica il **valore di ritorno**
     - `return` vuota o non specificata: la funzione ritorna valore `undefined`
-- **Parametri (formali)** e **argomenti** (parametri attuali) di funzioni; concetto di "**arità**"
+- **Parametri (formali)** e **argomenti** (parametri attuali) di funzioni; 
+- Concetto di **arità**: l'arità di una funzione è il numero di parametri che tale funzione "accetta" (o "riceve").
 - Flessibilità invocazione di funzione rispetto al numero di parametri forniti
+    - Se fornisco più argomenti all'atto di invocazione rispetto all'arità indicata, i parametri aggiuntivi vengono ignorati
+    - Se forniscono meno argomenti, quelli non specificati prenderanno valore `undefined`
 - L'array `arguments` tiene traccia degli argomenti con cui la funzione è stata invocata
 - Argomenti con valori di default (ES6)
-- Da ES6: "rest parameter" `function(a,...r){ }` e operatore di "spread" `f(...[1,2,3])`
+    - Può essere emulato in ES5 controllando se gli argomenti sono `undefined`
+- (AVANZATO) Da ES6: "rest parameter" `function(a,...r){ }` e operatore di "spread" `f(...[1,2,3])`
 - Le funzioni sono **oggetti "di prima classe"**; cioè, le posso assegnare a variabili, passare ad altre funzioni come argomenti, ritornarle come valori da funzioni etc.
 - **Funzioni anonime**: ad es. `function(x,y){ return x+y; } // notare che non c'è nome`
 
@@ -720,13 +725,6 @@ Esercizi semplici
 
 * Fattoriale di un numero in versione iterativa: `n! = n*(n-1)*(n-2)*...*1`
 * Conteggio delle occorrenze di un valore in un array: `howMany([2,5,2,1,2], 2) // 3`
-* Funzione per appendere o prependere un elemento a un array
-    - `append([4,1], 7) // [4,1,7]`
-    - `prepend([4,1], 7) // [7,4,1]`
-* Inversione degli elementi in un array: `reverse([3,7,1]) // [1,7,3]`
-* Funzione che somma tutti i parametri numerici forniti: `somma(1,4,2,3) // 10`, `somma(1,"xxx",2) // 3`
-    - Nota: occorre utilizzare `arguments` per gestire un qualsiasi numero di argomenti
-    - Consiglio: utilizzare l'operatore `typeof` per controllare i tipi degli argomenti
 
 <a name="lezione-0202"></a>
 
@@ -736,8 +734,9 @@ Esercizi semplici
 
 Sommario
 
-* Consolidamento
-* Esercizi 
+* Funzioni ricorsive
+* Funzioni di ordine superiore
+* Consolidamento ed esercizi 
 
 ### Ancora sulle funzioni
 
@@ -750,14 +749,47 @@ Sommario
 - Funzioni che accettano altre funzioni come variabili
 - Funzioni che ritornano altre funzioni come valore di output
 
+### Pseudocodice
+
+[Pseudocodice](https://it.wikipedia.org/wiki/Pseudocodice): descrizione informale e "ad alto livello" di un programma o algoritmo.
+
+* Altri nomi per lo stesso concetto: _pseudocodifica_, _pseudolinguaggio_ o _linguaggio di progettazione_
+* Uno pseudolinguaggio usa la convenzioni strutturali di un comune linguaggio di programmazione, ma è pensato per essere leggibile più dagli uomini che dai computer.
+
+Esempio
+
+```
+INIZIO
+
+Scrivi: "Inserisci un numero naturale n"
+Leggi n dall'utente
+
+Se n%2 è = 0 (se il resto della divisione per 2 è 0):
+    Scrivi: "Il numero è pari"
+Altrimenti:
+    Scrivi: "Il numero è dispari".
+
+FINE
+```
+
 ### Esercizi
+
+Esercizi semplici
+
+* Funzione per appendere o prependere un elemento a un array
+    - `append([4,1], 7) // [4,1,7]`
+    - `prepend([4,1], 7) // [7,4,1]`
+* Inversione degli elementi in un array: `reverse([3,7,1]) // [1,7,3]`
+* Funzione che somma tutti i parametri numerici forniti: `somma(1,4,2,3) // 10, somma(1,"xxx",2) // 3`
+     - Nota: occorre utilizzare arguments per gestire un qualsiasi numero di argomenti
+     - Consiglio: utilizzare l’operatore `typeof` per controllare i tipi degli argomenti
 
 Funzioni ricorsive
 
-* Fattoriale di un numero in versione ricorsiva: `n! = n*(n-1)*(n-2)*...*1`
+* Fattoriale di un numero in versione ricorsiva: ``n! = n*(n-1)*(n-2)*...*1`
 * Serie di Fibonacci: `0,1,1,2,3,5,8,13,21,34,...`
 
-Funzioni "higher-order"
+Funzioni “higher-order”
 
 * `map([1,2,3], function(i){ return i+1; }) // [2,3,4]`
     - `map` applica la funzione fornita come secondo parametro a tutti gli elementi della lista fornita come primo parametro
