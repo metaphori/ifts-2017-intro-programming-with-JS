@@ -5,7 +5,8 @@ Questo "quaderno" è un supporto per questo modulo IFTS di introduzione alla pro
 
 Pagine relative alle lezioni:
 
-* **[Lezione 02/02/2017](#lezione-0202)**, 6, 24/60 - Funzioni; pseudocodice; consolidamento generale
+* **[Lezione 03/02/2017](#lezione-0302)**, 7, 28/60 - Funzioni di ordine superiore; consolidamento generale
+* [Lezione 02/02/2017](#lezione-0202), 6, 24/60 - Funzioni ricorsive; pseudocodice; consolidamento generale
 * [Lezione 01/02/2017](#lezione-0102), 5, 20/60 - Funzioni: le basi
 * [Lezione 31/01/2017](#lezione-3101), 4, 16/60 - Array; strutture di controllo del flusso
 * [Lezione 30/01/2017](#lezione-3001), 3, 12/60 - Specifiche sw; primi elementi in JS (tipi, var, espressioni)
@@ -735,7 +736,6 @@ Esercizi semplici
 Sommario
 
 * Funzioni ricorsive
-* Funzioni di ordine superiore
 * Consolidamento ed esercizi 
 
 ### Ancora sulle funzioni
@@ -743,11 +743,6 @@ Sommario
 **Funzioni ricorsive**: funzioni che chiamano se stesse
 
 - Occorre un "caso base" che faccia terminare la ricorsione
-
-**Funzioni "di ordine superiore" (higher-order)**: funzioni che manipolano altre funzioni.
-
-- Funzioni che accettano altre funzioni come parametri
-- Funzioni che ritornano altre funzioni in output
 
 ### Pseudocodice
 
@@ -772,6 +767,12 @@ Altrimenti:
 FINE
 ```
 
+**Esercizio**: convertire lo pseudocodice qui sopra in codice JavaScript. Consigli per l'implementazione:
+
+* `prompt("Msg")` è la funzione predefinita di JavaScript con cui posso chiedere un input all'utente; questa funzione ritorna una stringa che ha come contenuto il testo digitato dall'utente
+* `parseInt(s)` può essere usato per convertire esplicitamente la stringa `s` nel numero intero corrispondente
+* `console.log(s)` si può utilizzare per scrivere a console la stringa `s`
+
 ### Esercizi
 
 Esercizi semplici
@@ -779,14 +780,143 @@ Esercizi semplici
 * Funzione per appendere o prependere un elemento a un array
     - `append([4,1], 7) // [4,1,7]`
     - `prepend([4,1], 7) // [7,4,1]`
+
+### Esercizi svolti a lezione
+
+```javascript
+/* Funzione per calcolo del numero di occorrenze di un elemento in un array */
+function numOccs(arr,elem){
+  var n = 0;
+  for(var i=0; i<arr.length; i++) if(arr[i]===elem) n++;
+  return n;
+}
+numOccs([7,3,5,7,1,7],7) // 7
+
+/* Funzione ricorsiva per il calcolo del fattoriale di un numero */
+function fattoriale(n){
+  if(n<=0) return 1;
+  else return n * fattoriale(n-1); // n * fattoriale(n-1) = n * (n-1) * fattoriale(n-1-1)...
+}
+fattoriale(0) // 1
+fattoriale(5) // 120
+
+/* Funzione ricorsiva per il calcolo del numero minimo in un array */
+function min(lst,i,m){
+  if(lst.length==0) return "BAD";
+  if(typeof(i)==="undefined") return min(lst,1,lst[0]);
+  if(i>=lst.length) return m;
+  var newM = lst[i]<m ? lst[i] : m;
+  return min(lst,i+1,newM);
+}
+min([3,7,1,8]) // 1
+// min([3,7,1,0])
+// \-> min([3,7,1,0], 1, 3)
+//     \-> min([3,7,1,0], 2, 3)
+//         \-> min([3,7,1,0], 3, 1)
+//             \-> min([3,7,1,0], 4, 1)
+//                 \-> 1
+
+/* Funzione di utilità che scarta l'elemento in testa all'array in input */
+function resto(arr){
+  var result = [];
+  for(var i=1; i<arr.length; i++) result[i-1] = arr[i];
+  return result;
+}
+resto([8,2,4,1]) // [2,4,1]
+
+/* Restituisce true o false a seconda che l'array 'arr' contenga 'elem' o meno. 
+Versione iterativa */
+function contains(arr, elem){
+  for(var i=0; i<arr.length; i++) if(arr[i]===elem) return true;
+  return false;
+}
+contains(["bob","john","will","drake"], "john") // true
+contains(["bob","john","will","drake"], "carl") // false
+
+/* Restituisce true o false a seconda che l'array 'arr' contenga 'elem' o meno. 
+Versione ricorsiva */
+function contains2(arr, elem){
+  if(arr.length==0) return false;
+  return arr[0]===elem || contains(resto(arr),elem);
+}
+
+/* Conta il numero di occorrenze di 'elem' in 'arr'. */
+function numOccs(arr, elem){
+  if(arr.length==0) return 0;
+  return (arr[0]===elem ? 1 : 0) + numOccs(resto(arr),elem);
+}
+contains(["bob","john","bob","will","drake"], "bob") // 2
+contains(["bob","john","bob","will","drake"], "carl") // 0
+
+/* Conversione dallo pseudocodice d'esempio (vedi sopra) al codice JavaScript */
+function esercizio(){
+  var n = parseInt(prompt("Inserisci un numero naturale n"));
+  if(n%2===0) console.log("Il numero " + n + " è pari");
+  else console.log("Il numero " + n + " è dispari");
+}
+
+/* Appende (cioè, aggiunge un elemento alla fine) un elemento in un array. 
+Questa versione modifica l'array di input sul posto (non ne crea uno nuovo). */
+function append(lst, x){
+  lst[lst.length] = x;
+  return lst;
+}
+var ar = [1,2]
+append(ar, "x")
+ar // [1,2,"x"]
+
+/* Prepende un elemento in un array (cioè, lo inserisce in testa all'array). 
+Modifica 'arr' sul posto (non ne crea uno nuovo). */
+function prepend(arr, elem){
+  var prev = elem;
+  var size = arr.length;
+  for(var i=0; i<=size; i++){
+    var temp = prev;
+    prev = arr[i];
+    arr[i] = temp;
+  }
+  return arr;
+}
+
+/* Versione di "prepend" che ritorna un nuovo array. */
+function prepend2(arr, elem){
+  var res = [elem];
+  for(var i=0; i<arr.length; i++) res[i+1] = arr[i];
+  return res;
+}
+```
+
+<a name="lezione-0302"></a>
+
+<hr />
+
+## Lezione 7: 03/02/2017
+
+Sommario
+
+* Funzioni di ordine superiore
+* Consolidamento ed esercizi 
+
+### Ancora sulle funzioni
+
+**Funzioni "di ordine superiore" (higher-order)**: funzioni che manipolano altre funzioni.
+
+- Funzioni che accettano altre funzioni come parametri
+- Funzioni che ritornano altre funzioni in output
+
+Esempio: funzione `howMany(arr,p)` che ritorna il numero di elementi dell'array `arr` che "soddisfano" il predicato `p`.
+
+* NOTA: un **predicato** è una funzione che "mappa" (cioè, "fa corrispondere") il parametro di input in un valore booleano.
+
+### Esercizi
+
 * Inversione degli elementi in un array: `reverse([3,7,1]) // [1,7,3]`
-* Funzione che somma tutti i parametri numerici forniti: `somma(1,4,2,3) // 10, somma(1,"xxx",2) // 3`
-     - Nota: occorre utilizzare arguments per gestire un qualsiasi numero di argomenti
+* Funzione che somma tutti i parametri numerici forniti: `somma(1,4,2,3) // 10`, `somma(1,"xxx",2) // 3`
+     - Nota: occorre utilizzare `arguments` per gestire un qualsiasi numero di argomenti
      - Consiglio: utilizzare l’operatore `typeof` per controllare i tipi degli argomenti
 
 Funzioni ricorsive
 
-* Fattoriale di un numero in versione ricorsiva: ``n! = n*(n-1)*(n-2)*...*1`
 * Serie di Fibonacci: `0,1,1,2,3,5,8,13,21,34,...`
 
 Funzioni “higher-order”
