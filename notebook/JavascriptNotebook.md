@@ -746,8 +746,8 @@ Sommario
 
 **Funzioni "di ordine superiore" (higher-order)**: funzioni che manipolano altre funzioni.
 
-- Funzioni che accettano altre funzioni come variabili
-- Funzioni che ritornano altre funzioni come valore di output
+- Funzioni che accettano altre funzioni come parametri
+- Funzioni che ritornano altre funzioni in output
 
 ### Pseudocodice
 
