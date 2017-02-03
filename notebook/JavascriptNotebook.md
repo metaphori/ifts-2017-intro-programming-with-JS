@@ -729,6 +729,18 @@ Consiglio:
 - `for-in`: per iterare sulle proprietà iterabili di oggetti
 - `for-of`: nuovo modo (ES6) per iterare su oggetti iterabili, basato sulla proprietà interna [Symbol.iterator]
 
+```javascript
+for(A; B; C) D;
+// A;                           ("A" eseguita solo la prima volta)
+// if(B){ D } else { "esci"; }  (eseguo corpo "D" solo se "B" è vera)
+// C;                           ("C" eseguita dopo ogni iterazione)  
+// if(B){ D } else { "esci"; }
+// C;
+// if(B){ D } else { "esci"; }
+// C;
+// ..............
+```
+
 #### Ancora sui cicli
 
 - `break`: interrompe il ciclo
