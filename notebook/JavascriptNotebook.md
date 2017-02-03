@@ -897,6 +897,31 @@ Sommario
 * Funzioni di ordine superiore
 * Consolidamento ed esercizi 
 
+### Esercizi
+
+* Funzione per ripetere una stringa `s` un numero `n` di volte; opzionalmente, dev'essere possibile indicare una stringa di separazione.
+     - `ripeti("abc", 3) // "abcabcabc"`
+     - `ripeti("abc", 3, "-") // "abc-abc-abc"`
+* Inversione degli elementi in un array: `reverse([3,7,1]) // [1,7,3]`
+* Funzione che somma tutti i parametri numerici forniti: 
+     - `somma(1,4,2,3) // 10`
+     - `somma(1,"xxx",2) // 3`
+     - Nota: occorre utilizzare `arguments` per gestire un qualsiasi numero di argomenti
+     - Consiglio: utilizzare l’operatore `typeof` per controllare i tipi degli argomenti
+
+Funzioni ricorsive
+
+* Serie di Fibonacci: `0,1,1,2,3,5,8,13,21,34,...`
+
+Esercizio di comprensione: cercare di capire qual è il funzionamento della seguente funzione.
+
+```javascript
+function xyz(p){
+  for(var i=0; i<p.length/2; i++) if(p[i]!==p[p.length-1-i]) return false;
+  return true;
+}
+```
+
 ### Ancora sulle funzioni
 
 **Funzioni "di ordine superiore" (higher-order)**: funzioni che manipolano altre funzioni.
@@ -908,18 +933,7 @@ Esempio: funzione `howMany(arr,p)` che ritorna il numero di elementi dell'array 
 
 * NOTA: un **predicato** è una funzione che "mappa" (cioè, "fa corrispondere") il parametro di input in un valore booleano.
 
-### Esercizi
-
-* Inversione degli elementi in un array: `reverse([3,7,1]) // [1,7,3]`
-* Funzione che somma tutti i parametri numerici forniti: `somma(1,4,2,3) // 10`, `somma(1,"xxx",2) // 3`
-     - Nota: occorre utilizzare `arguments` per gestire un qualsiasi numero di argomenti
-     - Consiglio: utilizzare l’operatore `typeof` per controllare i tipi degli argomenti
-
-Funzioni ricorsive
-
-* Serie di Fibonacci: `0,1,1,2,3,5,8,13,21,34,...`
-
-Funzioni “higher-order”
+Esercizi su funzioni “higher-order”
 
 * `map([1,2,3], function(i){ return i+1; }) // [2,3,4]`
     - `map` applica la funzione fornita come secondo parametro a tutti gli elementi della lista fornita come primo parametro
