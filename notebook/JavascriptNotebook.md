@@ -5,7 +5,8 @@ Questo "quaderno" è un supporto per questo modulo IFTS di introduzione alla pro
 
 Pagine relative alle lezioni:
 
-* **[Lezione 03/02/2017](#lezione-0302)**, 7, 28/60 - Funzioni di ordine superiore; consolidamento generale
+* [Lezione 06/02/2017](#lezione-0602), 8, 32/60 - Funzioni di ordine superiore; consolidamento generale
+* [Lezione 03/02/2017](#lezione-0302), 7, 28/60 - Ripasso ed esercizi
 * [Lezione 02/02/2017](#lezione-0202), 6, 24/60 - Funzioni ricorsive; pseudocodice; consolidamento generale
 * [Lezione 01/02/2017](#lezione-0102), 5, 20/60 - Funzioni: le basi
 * [Lezione 31/01/2017](#lezione-3101), 4, 16/60 - Array; strutture di controllo del flusso
@@ -949,7 +950,7 @@ function prepend2(arr, elem){
 
 Sommario
 
-* Funzioni di ordine superiore
+* Ripasso
 * Consolidamento ed esercizi 
 
 ### Esercizi
@@ -964,10 +965,6 @@ Sommario
      - Nota: occorre utilizzare `arguments` per gestire un qualsiasi numero di argomenti
      - Consiglio: utilizzare l’operatore `typeof` per controllare i tipi degli argomenti
 
-Funzioni ricorsive
-
-* Serie di Fibonacci: `0,1,1,2,3,5,8,13,21,34,...`
-
 Esercizio di comprensione: cercare di capire qual è il funzionamento della seguente funzione.
 
 ```javascript
@@ -976,6 +973,76 @@ function xyz(p){
   return true;
 }
 ```
+
+Soluzioni agli esercizi svolti
+
+```javascript
+/* Ripete la stringa "s" un numero "n" di volta,
+   separando con un parametro "d" opzionale */
+function ripeti(s, n, d){
+  if(typeof(d)==="undefined") d = " ";
+  var result = "";
+  for(var i=1; i<n; i++) result = result + s + d;
+  result += s; // result = result + s
+  return result;
+}
+
+/* Restituisce un nuovo array che è l'inverso dell'array di input. */
+function reverse(arr){
+  var res = [];
+  for(var i=0; i<arr.length; i++)
+    res[arr.length-1-i] = arr[i];
+  return res; 
+}
+function reverse2(arr){
+  var res = [];
+  for(var i=arr.length-1; i>=0; i--)
+    res[arr.length-1-i] = arr[i];
+  return res; 
+}
+// NOTA: unica differenza tra "reverse" e "reverse2"
+// è l'ordine in cui scorro l'array di input.
+
+/* Somma esclusivamente i parametri numerici forniti. */
+function somma(){
+  var res = 0;
+  for(var i=0; i<arguments.length; i++)
+    if(typeof(arguments[i])=="number") res += arguments[i];
+  return res;
+}
+```
+
+### Array e tipi riferimento
+
+Contrastare il comportamento dei tipi primitivi (dove le variabili contengono il valore e lo "passano" per copia)
+
+```javascript
+var x = 10 // => undefined
+var y = x  // => undefined
+++y // => 11
+x   // => 10
+y   // => 11
+```
+
+rispetto al comportamento dei tipi riferimento (come ad es. gli array; dove le variabili contengono il **puntatore** all'oggetto)
+
+```javascript
+var x = [3,7] // => undefined
+var y = x     // => undefined   (NOTA: è copiato il puntatore, non l'intero oggetto)
+y[1] = 8      // => 8
+x[1]          // => 8  (!!!!!)
+```
+
+<a name="lezione-0602"></a>
+
+<hr />
+
+## Lezione 8: 06/02/2017
+
+Sommario
+
+* Funzioni di ordine superiore
+* Consolidamento ed esercizi 
 
 ### Ancora sulle funzioni
 
@@ -994,6 +1061,12 @@ Esercizi su funzioni “higher-order”
     - `map` applica la funzione fornita come secondo parametro a tutti gli elementi della lista fornita come primo parametro
 * `filter([1,2,3,4,5], function(n){ return n%2==0; }) // [2,4]`
     - Filtra gli elementi della lista sulla base della funzione fornita
+
+### Altri esercizi
+
+Funzioni ricorsive
+
+* Serie di Fibonacci: `0,1,1,2,3,5,8,13,21,34,...`
 
 -----------------------------------------
 
