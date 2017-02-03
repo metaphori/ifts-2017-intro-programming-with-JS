@@ -611,6 +611,49 @@ Operatori
 - Operatori di assegnamento composti: `x += y; x /= y;` etc.
 - Concatenazione di stringhe: `"ab"+"cd" // "abcd"`
 
+Esempi (nota: per convenzione, dopo `=>` indico il valore di ritorno dell'espressione o dello statement/istruzione)
+
+```javascript
+var x;   // => undefined   (statement)
+x        // => undefined
+x = 2+8; // => 10
+x        // => 10
+
+x++ // => 10
+x   // => 11
+++x // => 12
+x   // => 12
+
+x += 3 // => 13
+
+var y = "a" + "bc"; // => undefined (statement)
+y          // => "abc"
+y += "zzz" // => "abczzz"
+
+true || false  // => true
+false || true  // => true
+false || false // => false
+true && true   // => true
+false && true  // => false
+!false   // true
+
+!false ? "x" + "y" : true || false // => "xy"
+// In generale, prima di poter valutare una espressione complessa,
+//  le sottoespressioni devono essere valutate.
+// Quindi:     !false ? "x"+"y" : true || false
+//          => !false ? "xy" : true
+//          => "xy"
+
+var w = 7
+(w+1) == 8        // => 8 == 8 => true
+"abc" != "ab"+"c" // => "abc" != "abc" => false
+
+false == 0  // => true
+false === 0 // => false  (uguaglianza stretta)
+"22" != 22  // => false
+"22" !== 22 // => true   (disuguaglianza stretta)
+```
+
 <a name="lezione-3101"></a>
 
 <hr />
