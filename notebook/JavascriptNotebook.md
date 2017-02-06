@@ -1054,6 +1054,7 @@ Sommario
 Esempio: funzione `howMany(arr,p)` che ritorna il numero di elementi dell'array `arr` che "soddisfano" il predicato `p`.
 
 * NOTA: un **predicato** è una funzione che "mappa" (cioè, "fa corrispondere") il parametro di input in un valore booleano.
+* Esempio: `howMany([1,4,7,9,11,0,-4,8], function(n){ return n>5; }) // 4`
 
 Esercizi su funzioni “higher-order”
 
@@ -1062,11 +1063,46 @@ Esercizi su funzioni “higher-order”
 * `filter([1,2,3,4,5], function(n){ return n%2==0; }) // [2,4]`
     - Filtra gli elementi della lista sulla base della funzione fornita
 
-### Altri esercizi
+### Esercizi svolti
 
 Funzioni ricorsive
 
 * Serie di Fibonacci: `0,1,1,2,3,5,8,13,21,34,...`
+
+```javascript
+function fib(n){
+  if(n<=1) return 0;
+  if(n==2) return 1;
+  return fib(n-1)+fib(n-2);
+}
+```
+
+Altri esercizi
+
+```javascript
+// Verifica che 'arr' alterna numeri pari a numeri dispari (o viceversa)
+function f(arr) {
+  if(arr.length==0) return true;
+  var p = !(arr[0]%2==0);
+  for(var i=1; i<arr.length; i++){
+     var currP = arr[i]%2==0;
+     if(currP!=p) return i;
+     p = !p;
+  }
+  return true;
+}
+
+// Esercizio di comprensione: cosa fa?
+function xyz(arr){
+  var k = 0;
+  for(var i=0; i<arr.length; i++){
+    for(var j=1; j<arguments.length; j++){
+      if(arr[i]===arguments[j]) k++;
+    }
+  }
+  return k;
+}
+```
 
 -----------------------------------------
 
