@@ -5,6 +5,7 @@ Questo "quaderno" è un supporto per questo modulo IFTS di introduzione alla pro
 
 Pagine relative alle lezioni:
 
+* [Lezione 08/02/2017](#lezione-0802), 10, 40/60 - Costruttori; l'oggetto `Object`
 * **[Lezione 07/02/2017](#lezione-0702)**, 9, 36/60 - Introduzione alla programmazione ad oggetti in JavaScript
 * [Lezione 06/02/2017](#lezione-0602), 8, 32/60 - Funzioni di ordine superiore; consolidamento generale
 * [Lezione 03/02/2017](#lezione-0302), 7, 28/60 - Ripasso ed esercizi
@@ -1267,6 +1268,53 @@ var SeanConnery = {
 };
 
 SeanConnery.presentMe() // "Sir. Sean Connery"
+```
+
+Esercizio effettuato in aula: rettangolo
+
+```javascript
+var r = {
+  base: 0,
+  altezza: 0,
+  area: function(){ return this.base*this.altezza; },
+  setBase: function(b){ this.base = b; },
+  setAltezza: function(a){ this.altezza = a; }
+}; // =>undefined
+r.area() // => 0
+r.setAltezza(5); // => undefined
+r.setBase(3);    // => undefined
+r.base       // => 3
+r["altezza"] // => 5
+r.area()     // => 15
+```
+
+<a name="lezione-0802"></a>
+
+<hr />
+
+## Lezione 10: 08/02/2017
+
+Sommario
+
+* Costruttori
+* L'oggetto `Object` e proprietà ereditate da tutti gli oggetti
+
+### Programmazione ad oggetti in JavaScript
+
+#### Costruttori
+
+Un **costruttore** è una funzione utilizzata per costruire un oggetto.
+
+* Questa funzione può essere 
+
+```
+function Rect(base,altezza){
+  this.base = base;
+  this.altezza = altezza;
+  this.area = function(){ return this.base * this.altezza; }
+}
+
+var r1 = new Rect(3,5);
 ```
 
 #### Ancora sugli oggetti
