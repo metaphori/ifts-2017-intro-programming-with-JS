@@ -1288,6 +1288,10 @@ r["altezza"] // => 5
 r.area()     // => 15
 ```
 
+#### Oggetti e tipi riferimento
+
+* Differenza tra tipi di dato primitivi e oggetti: mentre i primi sono manipolati "per valore", i secondi "per riferimento"
+
 <a name="lezione-0802"></a>
 
 <hr />
@@ -1296,8 +1300,35 @@ r.area()     // => 15
 
 Sommario
 
+* L'oggetto `Object`
+* Alla scoperta dell'oggetto `Array`
+
+
+### L'oggetto `Object`
+
+- Metodi ereditati da `Object`: `toString` (conversione oggetto a stringa), `valueOf` (conversione oggetto a tipo primitivo); questi metodi sono chiamati implicitamente da JavaScript in alcune situazioni.
+- `valueOf` è chiamato implicitamente ogni volta che un oggetto è usato con un operatore
+- `toString` è chiamato implicitamente quando l'oggetto è utilizzato in una situazione in cui ci si aspetta una stringa
+
+```
+"Hello " + WillSmith // "Hello [object Object]"
+WillSmith.toString = WillSmith.presentMe
+"Hello " + WillSmith // "Hello Mr. Will Smith"
+```
+
+### L'oggetto `Array`
+
+Vedi [a proposito degli Array nella guida di riferimento](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array).
+
+<a name="lezione-0902"></a>
+
+<hr />
+
+## Lezione 11: 09/02/2017
+
+Sommario
+
 * Costruttori
-* L'oggetto `Object` e proprietà ereditate da tutti gli oggetti
 
 ### Programmazione ad oggetti in JavaScript
 
@@ -1315,19 +1346,6 @@ function Rect(base,altezza){
 }
 
 var r1 = new Rect(3,5);
-```
-
-#### Ancora sugli oggetti
-
-- Differenza tra tipi di dato primitivi e oggetti: mentre i primi sono manipolati "per valore", i secondi "per riferimento"
-- Metodi ereditati da `Object`: `toString` (conversione oggetto a stringa), `valueOf` (conversione oggetto a tipo primitivo); questi metodi sono chiamati implicitamente da JavaScript in alcune situazioni.
-- `valueOf` è chiamato implicitamente ogni volta che un oggetto è usato con un operatore
-- `toString` è chiamato implicitamente quando l'oggetto è utilizzato in una situazione in cui ci si aspetta una stringa
-
-```
-"Hello " + WillSmith // "Hello [object Object]"
-WillSmith.toString = WillSmith.presentMe
-"Hello " + WillSmith // "Hello Mr. Will Smith"
 ```
 
 -----------------------------------------
