@@ -5,6 +5,7 @@ Questo "quaderno" è un supporto per questo modulo IFTS di introduzione alla pro
 
 Pagine relative alle lezioni:
 
+* **[Lezione 07/02/2017](#lezione-0702)**, 9, 36/60 - ???
 * [Lezione 06/02/2017](#lezione-0602), 8, 32/60 - Funzioni di ordine superiore; consolidamento generale
 * [Lezione 03/02/2017](#lezione-0302), 7, 28/60 - Ripasso ed esercizi
 * [Lezione 02/02/2017](#lezione-0202), 6, 24/60 - Funzioni ricorsive; pseudocodice; consolidamento generale
@@ -1051,6 +1052,28 @@ Sommario
 - Funzioni che accettano altre funzioni come parametri
 - Funzioni che ritornano altre funzioni in output
 
+Esempi:
+
+```javascript
+function howMany(arr, predicato){
+  var result = 0;
+
+  for(var k=0; k<arr.length; k++){
+    if(predicato(arr[k])) result++;
+  }
+
+  return result;
+}
+
+function times(n){
+  return function(x){ return x*n; }
+}
+var raddoppia = times(2);
+var triplica = times(3);
+raddoppia(3); // 6
+triplica(3); // 9
+```
+
 Esempio: funzione `howMany(arr,p)` che ritorna il numero di elementi dell'array `arr` che "soddisfano" il predicato `p`.
 
 * NOTA: un **predicato** è una funzione che "mappa" (cioè, "fa corrispondere") il parametro di input in un valore booleano.
@@ -1062,6 +1085,24 @@ Esercizi su funzioni “higher-order”
     - `map` applica la funzione fornita come secondo parametro a tutti gli elementi della lista fornita come primo parametro
 * `filter([1,2,3,4,5], function(n){ return n%2==0; }) // [2,4]`
     - Filtra gli elementi della lista sulla base della funzione fornita
+    
+```javascript
+function map(arr, f){
+  var res = [];
+  for(i=0; i<arr.length; i++)
+    res[i] = f(arr[i]);
+  return res;
+}
+
+function filter(arr, p){
+  var res = [];
+  var j = 0;
+  for(var i=0; i<arr.length; i++){
+    if(p(arr[i])) res[j++] = arr[i];
+  }
+  return res; 
+}
+```
 
 ### Esercizi svolti
 
@@ -1102,6 +1143,143 @@ function xyz(arr){
   }
   return k;
 }
+```
+
+<a name="lezione-0702"></a>
+
+<hr />
+
+## Lezione 9: 07/02/2017
+
+Sommario
+
+* Introduzione alla programmazione orientata agli oggetti
+* Oggetti in JavaScript
+
+### Programmazione orientata agli oggetti
+
+[Object-Oriented Programming - OOP](https://en.wikipedia.org/wiki/Object-oriented_programming)([Ita](https://it.wikipedia.org/wiki/Programmazione_orientata_agli_oggetti))
+
+* L'OOP si fonda sul concetto di **oggetto**.
+* Gli **oggetti** sono delle entità software che incapsulano dati (spesso chiamati **campi, proprietà, attributi**) e funzionalità (**metodi**).
+
+```scala
+// NOTA: questi esempi sono in linguaggio Scala (non JavaScript)
+object WillSmith {
+  val name: String = "Will"
+  val surname: String = "Smith"
+  var age: Int = 48
+      
+  def presentMe() = s"Hi, my name is " + this.name + " " + this.surname + 
+                    " and I am " + this.age + " years old"
+}
+
+WillSmith.presentMe()
+```
+
+* Il principio di **incapsulamento**: gli oggetti raccolgono al loro interno sia dati sia funzioni (metodi) che agiscono su questi dati.
+* Il principio di **information hiding**: l'interazione con un oggetto avviene attraverso una specifica **interfaccia** che nasconde tutta una serie di dettagli circa il funzionamento concreto dell'oggetto
+    - Il concetto di **interfaccia**
+    - Solitamente, metodi e proprietà possono avere diversi **livelli di visibilità**
+
+```scala
+object WillSmith {
+  // ...
+  private var yearOfBirth: Int = 1968
+      
+  def age() = Calendar.getInstance().get(Calendar.YEAR) - this.yearOfBirth
+}
+    
+WillSmith.yearOfBirth // ERRORE: non si può accedere a proprietà privata
+WillSmith.age() // 48
+```
+
+* Il concetto di **classe**: schema per la costruzione di oggetti
+    - Nota: JavaScript ha aggiunto le classi solo a partire da ECMAScript 6
+* Gli oggetti sono anche chiamati **istanze** (di una classe)
+* **Ereditarietà**: relazione "è un"; consente di creare una specializzazione ("figlio") di un concetto esistente (detto "padre").
+
+```scala
+trait FormaGeometrica
+class Rettangolo(val base: Int, val altezza: Int) extends FormaGeometrica {
+  def area = this.base * this.altezza
+}
+class Quadrato(lato: Int) extends Rettangolo(lato,lato)
+
+val q = new Quadrato(5)
+q.area // 25
+
+val r = new Rettangolo(3,4)
+r.area // 24
+```
+
+### Oggetti in JavaScript
+
+#### Basi
+
+Creazione di oggetti
+
+* Sintassi letterale: `var o1 = { prop1: value1, prop2: value2 }`
+* Per istanziazione: `var o2 = new Object` 
+
+```javascript
+var WillSmith = {
+  name: "Will",
+  surname: "Smith",
+  yearOfBirth: 1968,
+  age: function(){ return new Date().getFullYear()-this.yearOfBirth; }
+};
+```
+
+**Proprietà**:
+
+* dot-notation (notazione puntata) 
+* array-notation (notazione array)
+* creazione per definizione
+
+**Metodi**: in pratica sono proprietà di tipo funzione.
+
+- `this`: all'interno di un metodo, punta all'oggetto corrente su cui il metodo è invocato.
+
+```javascript
+WillSmith.name        // => "Will"
+WillSmith.yearOfBirth // => 1968
+WillSmith["surname"]  // => "Smith" (Accesso con notazione array)
+
+WillSmith.name = "Willy" // => "Willy" (viene modificata la proprietà 'name')
+
+WillSmith.age()       // => 49 (Invocazione di metodo)
+WillSmith["age"]()    // => 49 (Invocazione di metodo)
+
+WillSmith.title = "Mr." // => "Mr." (Creazione di una nuova proprieta')
+WillSmith.presentMe = function(quick) { // Creazione di un nuovo metodo
+  if(quick) return this.name + " " + this.surname;
+  else return this.title + " " + this.name + " " + this.surname;
+};
+
+WillSmith.presentMe()  // "Mr. Willy Smith"
+
+var SeanConnery = { 
+  name: "Sean", 
+  surname: "Connery", 
+  title: "Sir.",
+  presentMe: WillSmith.presentMe // NOTA: sto riferendo (NON invocando) la funzione
+};
+
+SeanConnery.presentMe() // "Sir. Sean Connery"
+```
+
+#### Ancora sugli oggetti
+
+- Differenza tra tipi di dato primitivi e oggetti: mentre i primi sono manipolati "per valore", i secondi "per riferimento"
+- Metodi ereditati da `Object`: `toString` (conversione oggetto a stringa), `valueOf` (conversione oggetto a tipo primitivo); questi metodi sono chiamati implicitamente da JavaScript in alcune situazioni.
+- `valueOf` è chiamato implicitamente ogni volta che un oggetto è usato con un operatore
+- `toString` è chiamato implicitamente quando l'oggetto è utilizzato in una situazione in cui ci si aspetta una stringa
+
+```
+"Hello " + WillSmith // "Hello [object Object]"
+WillSmith.toString = WillSmith.presentMe
+"Hello " + WillSmith // "Hello Mr. Will Smith"
 ```
 
 -----------------------------------------
