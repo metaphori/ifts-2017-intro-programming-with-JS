@@ -5,7 +5,7 @@ Questo "quaderno" è un supporto per questo modulo IFTS di introduzione alla pro
 
 Pagine relative alle lezioni:
 
-* **[Lezione 07/02/2017](#lezione-0702)**, 9, 36/60 - ???
+* **[Lezione 07/02/2017](#lezione-0702)**, 9, 36/60 - Introduzione alla programmazione ad oggetti in JavaScript
 * [Lezione 06/02/2017](#lezione-0602), 8, 32/60 - Funzioni di ordine superiore; consolidamento generale
 * [Lezione 03/02/2017](#lezione-0302), 7, 28/60 - Ripasso ed esercizi
 * [Lezione 02/02/2017](#lezione-0202), 6, 24/60 - Funzioni ricorsive; pseudocodice; consolidamento generale
