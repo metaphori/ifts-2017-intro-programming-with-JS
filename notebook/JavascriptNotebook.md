@@ -6,7 +6,7 @@ Questo "quaderno" è un supporto per questo modulo IFTS di introduzione alla pro
 Pagine relative alle lezioni:
 
 * [Lezione 09/02/2017](#lezione-0902), 11, 44/60 - Costruttori; consolidamento generale; esercizi
-* **[Lezione 08/02/2017](#lezione-0802)**, 10, 40/60 - L'oggetto `Object`; l'oggetto `Array`; esercizi
+* **[Lezione 08/02/2017](#lezione-0802)**, 10, 40/60 - L'oggetto `Object`; l'oggetto `Array`; boxing; esercizi
 * [Lezione 07/02/2017](#lezione-0702), 9, 36/60 - Introduzione alla programmazione ad oggetti in JavaScript; esercizi
 * [Lezione 06/02/2017](#lezione-0602), 8, 32/60 - Funzioni di ordine superiore; consolidamento generale; esercizi
 * [Lezione 03/02/2017](#lezione-0302), 7, 28/60 - Ripasso ed esercizi
@@ -1358,9 +1358,12 @@ Sommario
 
 * L'oggetto `Object`
 * Alla scoperta dell'oggetto `Array`
-
+* Cos'è una "libreria standard"
+* Boxing: conversione da tipi primitivi ad oggetti
 
 ### L'oggetto `Object`
+
+Vedere [cosa dice la guida di riferimento di JavaScript su Object](https://developer.mozilla.org/it/docs/Web/JavaScript/Reference/Global_Objects/Object).
 
 - Metodi ereditati da `Object`: `toString` (conversione oggetto a stringa), `valueOf` (conversione oggetto a tipo primitivo); questi metodi sono chiamati implicitamente da JavaScript in alcune situazioni.
 - `valueOf` è chiamato implicitamente ogni volta che un oggetto è usato con un operatore
@@ -1372,9 +1375,160 @@ WillSmith.toString = WillSmith.presentMe
 "Hello " + WillSmith // "Hello Mr. Will Smith"
 ```
 
+Esempi mostrati a lezione
+
+```javascript
+{}.toString()   // Uncaught SyntaxError: Unexpected token .
+({}).toString() // "[object Object]"
+var o = {}      // undefined
+o.toString = function(){ return "il mio oggetto"; }
+o.toString()    // "il mio oggetto"
+" => " + o      // " => il mio oggetto"
+10 + o          // "10il mio oggetto"
+10 - o          // NaN 
+o - 10          // NaN
+o.valueOf()     // Object {...}
+10 - {}         // NaN
+{} - 10         // -10
+({}) - 10       // NaN
+o.valueOf = function(){ return 5; }; 
+10 - o          // 5
+o - 3           // 2
+```
+
 ### L'oggetto `Array`
 
 Vedi [a proposito degli Array nella guida di riferimento](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array).
+
+#### Esempi mostrati a lezione
+
+```javascript
+[1, "xy", true].forEach(function(e,i,a){ 
+  console.log(i+"/"+(a.length-1) +") "+e) 
+})
+// 0/2) 1
+// 1/2) xy
+// 2/2) true
+
+var arr = [7, "xy", true] // undefined
+arr.push([1,2])      // 4
+arr                  // [7, "xy", true, Array[2]]
+arr.push("abc", 77)  // 6
+arr                  // [7, "xy", true, Array[2], "abc", 77]
+
+
+a = [7, "zzz", true, 88]
+a.pop()    // 88
+a          // [7, "zzz", true]
+
+
+a.shift() // 7
+a         // ["zzz", true]
+
+
+a = [7, "zzz", true]
+a.unshift(5.5)  // 4
+a               // [5.5, 7, "zzz", true]
+a.unshift(7, 9) // 6
+a               // [7, 9, 5.5, 7, "zzz", true]
+
+a.indexOf("zzz") // 4
+a.indexOf("fsdhsafdasdf") // -1
+
+a.splice(1, 3) // [9, 5.5, 7]
+a              // [7, "zzz", true]
+a.splice()     // []
+a              // [7, "zzz", true]
+
+a.slice(0, a.length) // [7, "zzz", true]
+a.slice()            // [7, "zzz", true]
+```
+
+#### Esercizi mostrati a lezione
+
+```javascript
+/* Implementazione foreach(arr,f) che si comporta come
+   Array.prototype.forEach (cioè il forEach della libreria standard).
+*/
+function foreach(arr,f){
+  for(var i=0; i<arr.length; i++)
+    f(arr[i],i,arr);
+}
+
+foreach([1, "xy", true], function(e,i,a){ 
+  console.log(i+"/"+(a.length-1) +") "+e) 
+})
+
+/* Reimplementazione di push della libreria standard */
+function push(arr){
+  if(!Array.isArray(arr)) throw new Error("Bisogna passare un array!");
+  for(var i=1; i<arguments.length; i++)
+    arr[arr.length] = arguments[i];
+  return arr.length; 
+}
+
+var arr = [1]       // undefined
+push(arr, 7, "xy")  // 3
+arr                 // [1, 7, "xy"]
+
+/* Reimplementazione di pop della libreria standard */
+function pop(arr){
+  var result = arr[arr.length-1];
+  arr.length--;
+  return result;
+}
+
+a = [7, "zzz", true]
+pop(a)    // true
+a         // [7, "zzz"]
+
+/* Reimplementazione di shift della libreria standard */
+function shift(arr){
+  if(arr.length==0) return undefined;
+  var toWrite = arr[arr.length-1];
+  for(var i=arr.length-2; i>=0; i--){
+    var temp = toWrite
+    toWrite = arr[i];
+    arr[i] = temp;
+  }
+  arr.length = arr.length-1;
+  return toWrite;
+}
+
+a = [7, "zzz", true]
+shift(a) // 7
+a        // ["zzz", true]0: "zzz"1: truelength: 2__proto__: Array[0]
+shift([])
+
+function slice(arr,init,end){
+  if(typeof(init)==="undefined") init = 0;
+  if(typeof(end)==="undefined") end = arr.length;
+  var res = [], j=0;
+  for(var i=init; i<end; i++)
+    res[j++] = arr[i];
+  return res;
+}
+
+slice([1,7,9,10,4,8],1, 4) // [7, 9, 10]
+```
+
+### Altre note
+
+**Libreria standard** ([standard library](https://en.wikipedia.org/wiki/Standard_library)): libreria messa a disposizione in tutte le implementazioni di un certo linguaggio di programmazione.
+
+- Ad esempio, la libreria standard di JavaScript è quella libreria utilizzabile in ogni implementazione di JavaScript.
+- Ad esempio, i metodi sulle stringhe (`"abc".toUpperCase()`) e sugli array (`[1,2].forEach(...)`) fanno parte della libreria standard.
+
+**Boxing**: conversione implicita di valori primitivi in oggetti
+
+- I valori di tipi primitivi quali stringhe, booleani, numeri, null, undefined non hanno metodi invocabili su di essi.
+- Tuttavia, è possibile comunque invocare metodi su essi in quanto implicitamente avviene un processo che si chiama **boxing**, cioè la conversione automatica del valore in un oggetto di una classe wrapper che invece fornisce tali metodi.
+
+```javascript
+"abc".toUpperCase() // "ABC"
+20.toString()       // "20"
+```
+
 
 <a name="lezione-0902"></a>
 
