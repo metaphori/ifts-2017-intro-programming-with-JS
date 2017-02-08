@@ -5,13 +5,14 @@ Questo "quaderno" è un supporto per questo modulo IFTS di introduzione alla pro
 
 Pagine relative alle lezioni:
 
-* [Lezione 08/02/2017](#lezione-0802), 10, 40/60 - Costruttori; l'oggetto `Object`
-* **[Lezione 07/02/2017](#lezione-0702)**, 9, 36/60 - Introduzione alla programmazione ad oggetti in JavaScript
-* [Lezione 06/02/2017](#lezione-0602), 8, 32/60 - Funzioni di ordine superiore; consolidamento generale
+* [Lezione 09/02/2017](#lezione-0902), 11, 44/60 - Costruttori; consolidamento generale; esercizi
+* **[Lezione 08/02/2017](#lezione-0802)**, 10, 40/60 - L'oggetto `Object`; l'oggetto `Array`; esercizi
+* [Lezione 07/02/2017](#lezione-0702), 9, 36/60 - Introduzione alla programmazione ad oggetti in JavaScript; esercizi
+* [Lezione 06/02/2017](#lezione-0602), 8, 32/60 - Funzioni di ordine superiore; consolidamento generale; esercizi
 * [Lezione 03/02/2017](#lezione-0302), 7, 28/60 - Ripasso ed esercizi
-* [Lezione 02/02/2017](#lezione-0202), 6, 24/60 - Funzioni ricorsive; pseudocodice; consolidamento generale
-* [Lezione 01/02/2017](#lezione-0102), 5, 20/60 - Funzioni: le basi
-* [Lezione 31/01/2017](#lezione-3101), 4, 16/60 - Array; strutture di controllo del flusso
+* [Lezione 02/02/2017](#lezione-0202), 6, 24/60 - Funzioni ricorsive; pseudocodice; consolidamento generale; esercizi
+* [Lezione 01/02/2017](#lezione-0102), 5, 20/60 - Funzioni: le basi; esercizi
+* [Lezione 31/01/2017](#lezione-3101), 4, 16/60 - Array; strutture di controllo del flusso; esercizi
 * [Lezione 30/01/2017](#lezione-3001), 3, 12/60 - Specifiche sw; primi elementi in JS (tipi, var, espressioni)
 * [Lezione 27/01/2017](#lezione-2701), 2, 08/60 - Intro ai linguaggi; embedding JS in HTML
 * [Lezione 26/01/2017](#lezione-2601), 1, 04/60 - Intro al modulo; ing. del sw
@@ -1291,6 +1292,61 @@ r.area()     // => 15
 #### Oggetti e tipi riferimento
 
 * Differenza tra tipi di dato primitivi e oggetti: mentre i primi sono manipolati "per valore", i secondi "per riferimento"
+
+### Esercizi svolti
+
+```javascript
+var av = {
+  init: 0,
+  end: 2,
+  arr: [],
+  setArray: function(arr){ 
+    this.arr = arr;
+  },
+  setWindow: function(init,end){
+    if(init<0 || end<0) return "BAD: negative nums";
+    if(init > end) return "BAD: init<end";
+    this.init = init;
+    this.end = end;
+  },
+  getView: function(){
+    var res = [], j=0;
+    for(var i=this.init; i<this.arr.length && i<=this.end; i++)
+      res[j++] = this.arr[i];
+    return res;
+  }
+};
+
+av.setArray([3,1,7,8,9]) // => undefined
+av.getView()       // => [3, 1, 7]
+av.setWindow(-4,3) // => "BAD"
+av.setWindow(4,-3) // => "BAD"
+av.setWindow(8, 4) // => "BAD"
+av.setWindow(1, 3) // => undefined
+av.getView()       // => [1, 7, 8]
+av.setArray([8])   // => undefined
+av.getView()       // => []
+av.setArray([8,9]) // => undefined
+av.getView()       // => [9]
+
+
+/* Verifica se tutti gli oggetti in 'obs' posseggono le proprietà in 'propNames' */
+function have(objs, propNames){
+  for(var i=0; i<objs.length; i++)
+    for(var j=0; j<propNames.length; j++)
+      if(typeof(objs[i][propNames[j]])==="undefined") return false;
+  return true;
+}
+/* Calcolo distanza tra due oggetti con coordinate 'x' e 'y';
+   Verifica con 'have()' che i due oggetti in input 'p1' e 'p2'
+   sono del formato corretto.
+*/
+function distance(p1,p2){
+  if(!have([p1,p2],["x","y"])) return "BAD";
+  return Math.sqrt(Math.pow(p2.x-p1.x,2) + Math.pow(p2.y-p1.y,2));
+}
+
+```
 
 <a name="lezione-0802"></a>
 
