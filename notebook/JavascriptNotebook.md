@@ -1529,6 +1529,16 @@ slice([1,7,9,10,4,8],1, 4) // [7, 9, 10]
 20.toString()       // "20"
 ```
 
+**Approcci alla modifica di valori**
+
+- Approccio 1) modifica "in place" dell'oggetto
+    - Più "orientato agli oggetti"; in quanto gli oggetti sono entità con stato (mutabile).
+- Approccio 2) restituzione di un **nuovo oggetto** con le modifiche rispetto all'oggetto di partenza
+    - Più funzionale (dove tipicamente le strutture dati sono immutabili).
+
+**Gestione degli errori**
+
+- E' possibile sollevare un errore via: `throw new Error("messaggio")`
 
 <a name="lezione-0902"></a>
 
@@ -1602,6 +1612,10 @@ obj.setName("Sean")// => undefined
 obj.getName()      // => "Will !!!"
 ```
 
+NOTA: proprietà getter/setter sono definite mediante parole chiave `get` e `set` all'interno di una definizione letterale di un oggetto. Per poter dichiarere dei getter e dei setter su oggetti già creati, occorre utilizzare il metodo `Object.defineProperty(o, p, d)`, il quale dichiara/imposta una proprietà di nome `p` sull'oggetto `o` con caratteristiche definite mediante il descrittore `d`. Per creare getter/setter, il descrittore `d` deve specificare due proprietà di nome `get` e `set` rispettivamente.
+
+* Si veda la guida di riferimento per [dettagli su Object.defineProperty](https://developer.mozilla.org/it/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty)
+
 Una proprietà può essere **rimossa** da un oggetto mediante l'operatore `delete`:
 
 ```javascript
@@ -1636,6 +1650,88 @@ var r2 = Rect(3,5); // SBAGLIATO!
 /* La funzione sopra è invocata ma 'this' non viene fatto puntare
    ad un nuovo oggetto. Invece, 'this' punterà all'oggetto globale. */
 ```
+
+### Esercizi svolti
+
+```javascript
+var o ={
+  yearOfBirth: 2000,
+  get age(){ return new Date().getFullYear() - this.yearOfBirth; },
+  set age(v){ this.yearOfBirth = new Date().getFullYear() - v; }
+} // undefined
+o.age         // 17
+o.age = 40    // 40
+o.age         // 40
+o.yearOfBirth // 1977
+
+// COSTRUTTORE PER UN PUNTO GEOMETRICO
+function Point(x,y){
+  this.x = x;
+  this.y = y;
+  this.distanceTo = function(p){
+    return Math.sqrt(Math.pow(p.x-this.x,2) + Math.pow(p.y-this.y,2))
+  };
+} // undefined
+var p1 = new Point(1,2) // undefined
+var p2 = new Point(3,5) // undefined
+p1       // Point {x: 1, y: 2}
+p2       // Point {x: 3, y: 5}
+p1.distanceTo(p2) // 3.605551275463989
+p2.distanceTo(p1) // 3.605551275463989
+p1.x       // 1
+p1.x = 3   // 3
+p2.distanceTo(p1)  // 3
+p1.distanceTo(p2)  // 3
+
+// FUNZIONE "BUILDER" o "FACTORY" PER CREARE RETTANGOLI
+function BuildRect(p1,p2){
+  if(!(p1 instanceof Point && p2 instanceof Point)) 
+    throw new Error("Bisogna fornire dei punti");
+  return new Rect(Math.abs(p1.x-p2.x),Math.abs(p1.y-p2.y));
+}
+var myRect = BuildRect(new Point(0,0), new Point(2,3)); // undefined
+myRect // Rect {base: 2, altezza: 3}
+myRect.area() // 6
+
+// FUNZIONE "BUILDER" o "FACTORY" PER CREARE RETTANGOLI/QUADRATI
+function BuildSquare(s){
+  return new Rect(s,s);
+}
+BuildSquare(3).area() // 9 
+
+// ALTRA VERSIONE DEL COSTRUTTORE "Rect"
+function Rect(p1,p2){
+  this.p1 = p1;
+  this.p2 = p2;
+  Object.defineProperty(this, "base", { 
+    get: function(){ return Math.abs(this.p1.x-this.p2.x); },
+    set: function(v){ throw new Error("Cannot be set"); }
+  });
+  Object.defineProperty(this, "altezza", { 
+    get: function(){ return Math.abs(this.p1.y-this.p2.y); },
+    set: function(v){ throw new Error("Cannot be set"); }
+  });
+}
+var r = new Rect(new Point(0,0), new Point(2,3)) // undefined
+r // Rect { p1: Point, p2: Point }
+r.base // 2
+r.altezza // 3
+r.base = 10 // ERROR: cannot be set
+```
+
+<a name="lezione-1002"></a>
+
+<hr />
+
+## Lezione 12: 10/02/2017
+
+Sommario
+
+* Gestione degli errori
+
+### Gestione degli errori in JavaScript
+
+
 
 -----------------------------------------
 
