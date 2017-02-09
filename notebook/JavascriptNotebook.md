@@ -5,8 +5,8 @@ Questo "quaderno" è un supporto per questo modulo IFTS di introduzione alla pro
 
 Pagine relative alle lezioni:
 
-* [Lezione 09/02/2017](#lezione-0902), 11, 44/60 - Costruttori; consolidamento generale; esercizi
-* **[Lezione 08/02/2017](#lezione-0802)**, 10, 40/60 - L'oggetto `Object`; l'oggetto `Array`; boxing; esercizi
+* **[Lezione 09/02/2017](#lezione-0902)**, 11, 44/60 - Dereferenziazione di oggetti e garbage collection; proprietà getter/setter; costruttori
+* [Lezione 08/02/2017](#lezione-0802), 10, 40/60 - L'oggetto `Object`; l'oggetto `Array`; boxing; esercizi
 * [Lezione 07/02/2017](#lezione-0702), 9, 36/60 - Introduzione alla programmazione ad oggetti in JavaScript; esercizi
 * [Lezione 06/02/2017](#lezione-0602), 8, 32/60 - Funzioni di ordine superiore; consolidamento generale; esercizi
 * [Lezione 03/02/2017](#lezione-0302), 7, 28/60 - Ripasso ed esercizi
@@ -1538,17 +1538,88 @@ slice([1,7,9,10,4,8],1, 4) // [7, 9, 10]
 
 Sommario
 
+* Dereferenziazione di oggetti e garbage collection
+* Proprietà getter/setter
 * Costruttori
+
+### Ricapitoliamo
+
+* Gli **oggetti**, in JavaScript, sono collezioni non ordinate di proprietà.
+* Una **proprietà**, in JavaScript, è effettivamente una coppia nome/valore.
+    - Quando il valore di una proprietà è una funzione, essa è chiamata **metodo**.
+* Gli oggetti sono **valori riferimento**, cioè, istanze di **tipi riferimento**.
+    - Quando assegnati a una variabile, viene assegnato un puntatore (riferimento) alla locazione di memoria in cui l'oggetto è memorizzato.
+* Gli oggetti sono **dinamici**, nel senso che possono cambiare ad ogni punto durante l'esecuzione del codice.
+
+#### Tipi riferimento built-in
+
+* Sono i seguenti: `Array, Date, Error, Function, Object, RegExp`
+* Alcuni di questi tipi riferimento ammettono forme letterali che consentono di definire valori riferimento senza creare un oggetto esplicitamente via `new`.
+    - Sapete fare degli esempi?
+    
+#### Tipi riferimento "wrapper" di tipi primitivi
+
+* Sono i seguenti: `String, Number, Boolean`
+* Se usate valori di tipi primitivi come se fossero oggetti (ad esempio?), allora i corrispondenti valori riferimento sono creati/distrutti automaticamente (**autoboxing**).
 
 ### Programmazione ad oggetti in JavaScript
 
+#### Dereferenziazione di oggetti
+
+```javascript
+var obj = new Object
+//...
+obj = null
+```
+
+* JavaScript è un linguaggio che prevede un **garbage-collector**; cioè, la macchina virtuale che esegue i "programmi" JavaScript ha uno strumento che si occupa di **liberare la memoria** relativa ad oggetti che non sono più utilizzati, in modo automatico.
+
+#### Proprietà
+
+Le **proprietà** sono di due tipi:
+
+1. **Proprietà dato**: contengono un valore.
+    - Valori di tipi primitivi o valori di tipi riferimento (come funzioni).
+2. **Proprietà d'accesso/accessorie**: non contengono un valore ma definiscono una funzione da chiamare in caso di accesso in lettura o in scrittura su una proprietà
+    - Definite mediante keyword `get` (per i **getter**) e `set`(per i **setter**).
+
+```javascript
+var obj = {
+  _name: "Bob",
+  get name(){ return this._name.toUpperCase(); },
+  set name(v){ this._name = v + " !!!"; },
+  
+  // NOTARE differenza rispetto a:
+  getName: function(){ return this.name.toUpperCase(); },
+  setName: function(v){ this._name = v + " !!!"; }
+}
+
+obj.name = "Will"  // => "Will"
+obj.name           // => "Will !!!"
+
+// NOTARE differenza rispetto a:
+obj.setName("Sean")// => undefined
+obj.getName()      // => "Will !!!"
+```
+
+Una proprietà può essere **rimossa** da un oggetto mediante l'operatore `delete`:
+
+```javascript
+var obj = { x: 10, y: 77 }
+delete obj.x     // true
+delete obj["y"]  // true
+obj // { }
+```
+
 #### Costruttori
 
-Un **costruttore** è una funzione utilizzata per costruire un oggetto.
+Un **costruttore** è una normale funzione. In particolare, si chiama "costruttore" una funzione utilizzata per costruire un oggetto.
 
-* Questa funzione può essere 
+* Per istanziare un oggetto mediante un costruttore, si utilizza la parola chiave `new`.
+* L'effetto di `new` è quello di creare un nuovo oggetto e di fare in modo che, all'interno del costruttore, `this` punti a questo nuovo oggetto creato.
+    - `this` è sempre disponibile in ogni scope (ambito di visibilità). Per funzioni definite al top-level, `this` rappresenta l''oggetto globale.
 
-```
+```javascript
 function Rect(base,altezza){
   this.base = base;
   this.altezza = altezza;
@@ -1556,6 +1627,14 @@ function Rect(base,altezza){
 }
 
 var r1 = new Rect(3,5);
+typeof(r1) // "object"
+r1 instanceof Rect      // true
+r1 instanceof Object    // true
+r1.constructor === Rect // true
+
+var r2 = Rect(3,5); // SBAGLIATO! 
+/* La funzione sopra è invocata ma 'this' non viene fatto puntare
+   ad un nuovo oggetto. Invece, 'this' punterà all'oggetto globale. */
 ```
 
 -----------------------------------------
