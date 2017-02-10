@@ -1728,10 +1728,134 @@ r.base = 10 // ERROR: cannot be set
 Sommario
 
 * Gestione degli errori
+* Prototipi
 
 ### Gestione degli errori in JavaScript
 
+```javascript
+try {
+    // ........
+    throw "Errore";            // lancia un errore
+    throw new Error("BAD"); // istruzione non raggiunta
+}
+catch(e) {
+    // Catturo l'errore e lo gestisco in qualche modo
+    if(e instanceof Error) console.log(e + "!!!");
+    else throw e;
+}
+finally {
+    // Questo blocco è eseguito sempre e comunque
+    // Sia in caso di eccezione sia senza.
+    console.log("Finally")
+}
+// Finally
+// Uncaught Errore
+```
 
+* L'istruzione `throw e` solleva un'eccezione con valore `e`.
+* Quando tale istruzione viene incontrata, si ferma l'esecuzione della funzione corrente e il controllo è passato al primo blocco `catch` nello stack delle chiamate. 
+* Se nessun blocco `catch` cattura l'eccezione, il programma termina.
+* Costruttori predefiniti per [oggetti "errore"](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error): `Error(msg), RangeError, SyntaxError, TypeError`
+    - Hanno due proprietà predefinite: `name, message`
+
+### Prototipi
+
+* Quando si crea un nuovo oggetto mediante `new C` (dove `C` è un costruttore), la proprietà `prototype` del costruttore `C` è assegnata alla proprietà interna `[[Prototype]]` del nuovo oggetto creato.
+    - In diversi browser (cioè implementazioni di JavaScript) il prototipo è accessibile mediante una proprietà `__proto__`.
+* `Object.getPrototypeOf(obj)` consente di leggere il valore della proprietà interna `[[Prototype]]` dell'oggetto `obj`.
+* **Risoluzione delle proprietà**: quando si accede a una proprietà di un oggetto, questa viene cercata prima tra le proprietà possedute dall'oggetto stesso, e se non trovata, si prosegue la ricerca nel prototipo dell'oggetto. 
+* I prototipi consentono di **condividere dati e metodi** attraverso tutte le istanze (oggetti) che hanno lo stesso prototipo.
+* **Relazione tra istanze, prototipi e costruttori**
+    - C'è un collegamento diretto tra un'istanza e il suo prototipo
+    - C'è un collegamento diretto tra il prototipo e il costruttore
+    - C'è un collegamento indiretto tra un'istanza e il costruttore attraverso il prototipo.
+* Poiché tutte le istanze di un particolare tipo riferimento condividono un prototipo, si possono aggiungere funzionalità a tutti questi oggetti in una volta sola aggiungendo agendo sul prototipo.
+    - Vale anche per gli oggetti built-in come stringhe ed array!
+* Quando si definisce una funzione (costruttore), la sua proprietà `prototype` è assegnata con un nuovo oggetto (che eredita da `Object.prototype`) che possiede una sola proprietà `constructor` (assegnata alla funzione stessa).
+    - Questo è il motivo per cui le istanze ottenute mediante un costruttore definito dall'utente ereditano da `Object.prototype`. Quindi diciamo che tale costruttore è un **sottotipo** di `Object`.
+
+```javascript
+function Con(n){ this.name = n }
+
+// APPROCCIO 1
+// Con.prototype.constructor = Con  (default per ogni funzione di nome "Con")
+Con.prototype.sayName = function(){ console.log(this.name); };
+Con.prototype.favorites = [];
+
+// APPROCCIO 2
+Con.prototype = {
+  sayName: function(){ console.log(this.name); },
+  favorites: [],
+  constructor = Con // IMPORTANTE! Altrimenti ci perdiamo il costruttore...
+};
+
+var obj1 = new Con("Vash")
+var obj2 = new Con("Legato")
+obj1.sayName()  // Prints out: Vash
+obj2.sayName()  // Prints out: Legato
+
+obj1.favorites.push("a");
+obj2.favorites.push("b");
+console.log(obj1.favorites); // Prints out: ["a","b"]
+
+obj1.constructor === Con // true
+```
+
+<a name="lezione-1102"></a>
+
+<hr />
+
+## Lezione 13: 11/02/2017
+
+Sommario
+
+* Ereditarietà pseudoclassica
+
+### Ereditarietà (pseudoclassica)
+
+* Abbiamo detto che le proprietà di un prototipo sono automaticamente disponibili sulle istanze che hanno tale prototipo. Questa è una forma di **ereditarietà**.
+- Ma poiché un prototipo è a sua volta un oggetto, allora un prototipo possederà direttamente alcune proprietà e ne erediterà altre dal suo prototipo. In altre parole, si ha in generale una **catena di prototipi**.
+- Si può quindi implementare l'**ereditarietà tra tipi creando una catena di prototipi a partire da un costruttore**.
+    - La catena tipicamente termina con `Object.prototype` che ha `null` come prototipo (`[[Prototype]]`).
+- **Ereditarietà tra oggetti**: si può impostare direttamente il prototipo di un oggetto mediante `Object.create(proto, desc)` dove `desc` è un oggetto del tipo `{ objProp: { value: 88, writable: true }, ... }`
+    - Un oggetto "completamente nudo" si può definire mediante: `Object.create(null)`
+- **Ereditarietà tra costruttori**
+
+```javascript
+function Rect(h,w){ this.height = h; this.width = w; }
+Rect.prototype.getArea = function(){ return this.height*this.width; }
+Rect.prototype.toString = function(){
+    return "[Rect " + this.height + "x" + this.width + "]";
+}
+
+function Square(side){ this.height = side; this.width = side; }
+Square.prototype = Object.create(Rect.prototype) // Concatenazione prototipi
+Square.prototype.constructor = Square;           // NOTE: ripristinato il riferimento al costruttore
+Square.prototype.toString = function(){
+    return "[Square " + this.height + "x" + this.width + "]";
+}
+
+var rect = new Rect(5,10)
+var square = new Square(6)
+
+rect.getArea()    // 50
+square.getArea()  // 36
+rect.toString()   // "[Rect 5x10]"
+square.toString() // "[Square 6x6]"
+
+square instanceof Square // true
+square instanceof Rect   // true
+```
+
+* **Constructor stealing**
+
+```javascript
+function Square(side){
+  Rect.call(this,side,side);
+}
+```
+
+* L'approccio basato su prototype chaining e constructor stealing è spesso chiamato **ereditarietà pseudo-classica** perché mima l'ereditarietà classica nei linguaggi basati su classi.
 
 -----------------------------------------
 
