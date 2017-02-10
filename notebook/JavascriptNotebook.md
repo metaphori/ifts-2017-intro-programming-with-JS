@@ -5,7 +5,8 @@ Questo "quaderno" è un supporto per questo modulo IFTS di introduzione alla pro
 
 Pagine relative alle lezioni:
 
-* **[Lezione 09/02/2017](#lezione-0902)**, 11, 44/60 - Dereferenziazione di oggetti e garbage collection; proprietà getter/setter; costruttori
+* **[Lezione 10/02/2017](#lezione-1002)**, 12, 48/60 - Gestione degli errori; prototipi; esercizi
+* [Lezione 09/02/2017](#lezione-0902), 11, 44/60 - Dereferenziazione di oggetti e garbage collection; proprietà getter/setter; costruttori; esercizi
 * [Lezione 08/02/2017](#lezione-0802), 10, 40/60 - L'oggetto `Object`; l'oggetto `Array`; boxing; esercizi
 * [Lezione 07/02/2017](#lezione-0702), 9, 36/60 - Introduzione alla programmazione ad oggetti in JavaScript; esercizi
 * [Lezione 06/02/2017](#lezione-0602), 8, 32/60 - Funzioni di ordine superiore; consolidamento generale; esercizi
@@ -1766,8 +1767,8 @@ finally {
 * **Risoluzione delle proprietà**: quando si accede a una proprietà di un oggetto, questa viene cercata prima tra le proprietà possedute dall'oggetto stesso, e se non trovata, si prosegue la ricerca nel prototipo dell'oggetto. 
 * I prototipi consentono di **condividere dati e metodi** attraverso tutte le istanze (oggetti) che hanno lo stesso prototipo.
 * **Relazione tra istanze, prototipi e costruttori**
-    - C'è un collegamento diretto tra un'istanza e il suo prototipo
-    - C'è un collegamento diretto tra il prototipo e il costruttore
+    - C'è un collegamento diretto tra un'istanza e il suo prototipo (proprietà interna `[[Prototype]]`)
+    - C'è un collegamento diretto tra il prototipo e il costruttore (`C.prototype` e `P.constructor`)
     - C'è un collegamento indiretto tra un'istanza e il costruttore attraverso il prototipo.
 * Poiché tutte le istanze di un particolare tipo riferimento condividono un prototipo, si possono aggiungere funzionalità a tutti questi oggetti in una volta sola aggiungendo agendo sul prototipo.
     - Vale anche per gli oggetti built-in come stringhe ed array!
@@ -1799,6 +1800,44 @@ obj2.favorites.push("b");
 console.log(obj1.favorites); // Prints out: ["a","b"]
 
 obj1.constructor === Con // true
+```
+
+#### Schema sui prototipi
+
+Preso da: http://exploringjs.com/es6/images/classes----methods_150dpi.png
+
+![](http://exploringjs.com/es6/images/classes----methods_150dpi.png)
+
+#### Operatore  `instanceof`
+
+[Operatore instanceof](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/instanceof): `<obj> instanceof <constructor>`
+
+* Questo operatore verifica la presenza di `constructor.prototype` nella catena di prototipi dell'oggetto.
+* L'esempio seguente è preso dalla guida di riferimento:
+
+```javascript
+// defining constructors
+function C() {}
+function D() {}
+
+var o = new C();
+
+o instanceof C; // true, because: Object.getPrototypeOf(o) === C.prototype
+o instanceof D; // false, because D.prototype is nowhere in o's prototype chain
+
+o instanceof Object; // true
+C.prototype instanceof Object // true
+
+C.prototype = {};
+var o2 = new C();
+
+o2 instanceof C; // true
+o instanceof C;  // false, because C.prototype is nowhere in o's prototype chain anymore
+
+D.prototype = new C(); // use inheritance
+var o3 = new D();
+o3 instanceof D; // true
+o3 instanceof C; // true
 ```
 
 <a name="lezione-1102"></a>
