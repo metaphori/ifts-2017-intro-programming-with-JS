@@ -1949,6 +1949,8 @@ Sommario
 
 ### Classi
 
+* Definizione: `class NomeClasse { /* corpo della classe */ }`
+    - Il corpo della classe consiste in definizione di costruttore, metodi, e/o proprietà getter/setter.
 * Le proprietà possono essere create solo all'interno del costruttore o dei metodi.
 * Le classi sono in realtà **"zucchero sintattico"** sopra l'utilizzo di funzioni costruttrici, prototipi etc.
 * Chiamare il costruttore della classe senza `new` provoca un errore.
@@ -2052,6 +2054,36 @@ s.area // 121
     - `^` corrisponde all'inizio dell'input o di una linea in caso di regex multilinea
     - `$` corrisponde alla fine dell'input (o di linea)
     - `\b` corrisponde al limite di una parola; `\B` corrisponde a un NON-limite di una parola.
+* Sintassi delle espressioni reglari: **raggruppamenti e riferimenti all'indietro**
+    - **Gruppo di cattura**: `(x)` corrisponde a `x` e ricorda tale match
+    - `(?:x)` corrisponde a `x` ma non ricorda tale match
+    - **Riferimento all'indietro**: `\N` sostituisce con il contenuto dell'N-esimo gruppo catturato.
+* Sintassi delle espressioni regolari: **quantificatori**
+    - `x*`: corrisponde ad avere `x` zero o più volte
+    - `x+`: corrisponde ad avere `x` una o più volte
+    - `x?`: corrisponde ad avere `x` zero o una volta
+    - `x{N}`: corrisponde ad avere `x` esattamente N volte
+    - `x{N,}`: corrisponde ad avere `x` almeno N volte
+    
+Metodi di `RegExp.prototype`
+
+* `exec(s)`
+* `test(s)`
+
+Esempio dalla guida
+
+```javascript
+var myRe = /ab*/g;
+var str = 'abbcdefabh';
+var myArray;
+while ((myArray = myRe.exec(str)) !== null) {
+  var msg = 'Found ' + myArray[0] + '. ';
+  msg += 'Next match starts at ' + myRe.lastIndex;
+  console.log(msg);
+}
+// Found abb. Next match starts at 3
+// Found ab. Next match starts at 9
+```
 
 <a name="lezione-1402"></a>
 
