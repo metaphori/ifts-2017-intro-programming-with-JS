@@ -2037,6 +2037,64 @@ var Square = class extends Rect {
 }
 ```
 
+**STUDIO DELLA SOLUZIONE**
+
+```javascript
+var Rect = class {
+  constructor(w,h){ this._width = w; this._height = h; }
+  get width(){ console.log("GET rect.width"); return this._width; }
+  set width(w){ console.log("SET rect.width"); this._width = w;  }
+  get height(){ console.log("GET rect.height"); return this._height;  }
+  set height(h){ console.log("SET rect.height"); this._height = h; }
+  get area(){ console.log("GET rect.area"); return this.width * this.height; }
+  get diagonal(){ console.log("GET rect.diagonal"); return Math.sqrt(Math.pow(this.width,2)+Math.pow(this.height,2)); }
+  toString(){ return "Sono un rettangolo di base " + this.width + " e altezza " + this.height + "."; }
+}
+var Square = class extends Rect {
+  constructor(s){ super(s,s); }
+  set side(s){ console.log("SET square.side"); super.width = s; super.height = s; } 
+  set width(w){ console.log("SET square.width"); this.side = w; }
+  set height(h){ console.log("SET square.width"); this.side = h; }
+  get width(){ console.log("GET square.width"); return super.width; }   
+  get height(){ console.log("GET square.width"); return super.height; } 
+  toString(){ return "Sono un quadrato di lato " + this.width + ". Oppure... " + super.toString(); }
+}
+
+var s = new Square(8)
+s.width = 11
+// SET square.width
+// SET square.side
+// SET rect.width
+// SET rect.height
+
+s.area
+// GET rect.area
+// GET square.width
+// GET rect.width
+// GET square.width
+// GET rect.height
+```
+
+**ESERCIZIO: trovare il problema nella seguente implementazione**
+
+```javascript
+var Rect = class {
+  constructor(w,h){ this.width = w; this.height = h; }
+  get area(){ return this.width * this.height; }   get diagonal(){ return Math.sqrt(Math.pow(this.width,2) +  Math.pow(this.height,2)); }
+  toString(){ return "Sono un rettangolo di base " + this.width + " e altezza " + this.height + "."; }
+}
+
+var Square = class extends Rect {
+  constructor(s){ super(s, s); }
+  set side(s){ super.width = s; super.height = s; }
+  set width(w){ this.side = w; }
+  set height(h){ this.side = h; }
+  get width(){ return super.width; }
+  get height(){ return super.height; }
+  toString(){ return "Sono un quadrato di lato " + this.width + ". Oppure... " + super.toString(); }
+}
+```
+
 ### Stringhe ed espressioni regolari
 
 #### Stringhe
