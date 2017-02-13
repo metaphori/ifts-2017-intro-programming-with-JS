@@ -2012,6 +2012,31 @@ s.width = 11
 s.area // 121
 ```
 
+**SOLUZIONE**
+
+```javascript
+
+var Rect = class {
+  constructor(w,h){ this._width = w; this._height = h; }
+  get width(){ return this._width; }
+  set width(w){ this._width = w; }
+  get height(){ return this._height; }
+  set height(h){ this._height = h; }
+  get area(){ return this.width * this.height; }
+  get diagonal(){ return Math.sqrt(Math.pow(this.width,2)+Math.pow(this.height,2)); }
+  toString(){ return "Sono un rettangolo di base " + this.width + " e altezza " + this.height + "."; }
+}
+var Square = class extends Rect {
+  constructor(s){ super(s,s); }
+  set side(s){ super.width = s; super.height = s; } 
+  set width(w){ this.side = w; }
+  set height(h){ this.side = h; }
+  get width(){ return super.width; }   
+  get height(){ return super.height; } 
+  toString(){ return "Sono un quadrato di lato " + this.width + ". Oppure... " + super.toString(); }
+}
+```
+
 ### Stringhe ed espressioni regolari
 
 #### Stringhe
