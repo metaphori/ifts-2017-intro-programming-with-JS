@@ -5,7 +5,8 @@ Questo "quaderno" è un supporto per questo modulo IFTS di introduzione alla pro
 
 Pagine relative alle lezioni:
 
-* **[Lezione 10/02/2017](#lezione-1002)**, 12, 48/60 - Gestione degli errori; prototipi; esercizi
+* **[Lezione 13/02/2017](#lezione-1302)**, 13, 52/60 - Ripasso ed esercizi
+* [Lezione 10/02/2017](#lezione-1002), 12, 48/60 - Gestione degli errori; prototipi; esercizi
 * [Lezione 09/02/2017](#lezione-0902), 11, 44/60 - Dereferenziazione di oggetti e garbage collection; proprietà getter/setter; costruttori; esercizi
 * [Lezione 08/02/2017](#lezione-0802), 10, 40/60 - L'oggetto `Object`; l'oggetto `Array`; boxing; esercizi
 * [Lezione 07/02/2017](#lezione-0702), 9, 36/60 - Introduzione alla programmazione ad oggetti in JavaScript; esercizi
@@ -1610,7 +1611,7 @@ obj.name           // => "Will !!!"
 
 // NOTARE differenza rispetto a:
 obj.setName("Sean")// => undefined
-obj.getName()      // => "Will !!!"
+obj.getName()      // => "Sean !!!"
 ```
 
 NOTA: proprietà getter/setter sono definite mediante parole chiave `get` e `set` all'interno di una definizione letterale di un oggetto. Per poter dichiarere dei getter e dei setter su oggetti già creati, occorre utilizzare il metodo `Object.defineProperty(o, p, d)`, il quale dichiara/imposta una proprietà di nome `p` sull'oggetto `o` con caratteristiche definite mediante il descrittore `d`. Per creare getter/setter, il descrittore `d` deve specificare due proprietà di nome `get` e `set` rispettivamente.
@@ -1730,6 +1731,7 @@ Sommario
 
 * Gestione degli errori
 * Prototipi
+* Approfondimento: ereditarietà pseudoclassica
 
 ### Gestione degli errori in JavaScript
 
@@ -1787,7 +1789,7 @@ Con.prototype.favorites = [];
 Con.prototype = {
   sayName: function(){ console.log(this.name); },
   favorites: [],
-  constructor = Con // IMPORTANTE! Altrimenti ci perdiamo il costruttore...
+  constructor: Con // IMPORTANTE! Altrimenti ci perdiamo il costruttore...
 };
 
 var obj1 = new Con("Vash")
@@ -1807,6 +1809,32 @@ obj1.constructor === Con // true
 Preso da: http://exploringjs.com/es6/images/classes----methods_150dpi.png
 
 ![](http://exploringjs.com/es6/images/classes----methods_150dpi.png)
+
+Codice equivalente per la figura sopra:
+
+```javascript
+var Foo = new Function("this.prop = 123;")
+Foo.staticMethod = function(){ return 55; }
+console.log("Foo.[[Prototype] === Function.prototype ? " + 
+            (Object.getPrototypeOf(Foo)===Function.prototype));
+console.log("Foo.prototype.constructor === Foo ? " + 
+            (Foo.prototype.constructor === Foo));
+console.log("Foo.prototype.[[Prototype]] === Object.prototype ? " + 
+            (Foo.prototype.__proto__ === Object.prototype));
+Foo.prototype.prototypeMethod = function(){ return 77; }
+var foo = new Foo();
+console.log("foo.[[prototype]] === Foo.prototype ? " + 
+            (foo.__proto__ === Foo.prototype));
+console.log("foo.prop="+foo.prop+
+            " ; Foo.staticMethod()="+Foo.staticMethod()+
+            " ; foo.prototypeMethod()="+foo.prototypeMethod());
+// Foo.[[Prototype] === Function.prototype ? true
+// Foo.prototype.constructor === Foo ? true
+// Foo.prototype.[[Prototype]] === Object.prototype ? true
+// foo.[[prototype]] === Foo.prototype ? true
+// foo.prop=123 ; Foo.staticMethod()=55 ; foo.prototypeMethod()=77
+```
+
 
 #### Operatore  `instanceof`
 
@@ -1840,17 +1868,29 @@ o3 instanceof D; // true
 o3 instanceof C; // true
 ```
 
-<a name="lezione-1102"></a>
+### Esempi mostrati a lezione
 
-<hr />
+```javascript
+function Point(x,y){
+  this.x = x;
+  this.y = y;
+}
+Point.prototype.distanceTo = function(p){
+    return Math.sqrt(Math.pow(p.x-this.x,2) + Math.pow(p.y-this.y,2))
+};
+  
+var o1 = { a: 7 }     // undefined
+var o2 = { b: "x" }   // undefined
+var o3 = { c : true } // undefined
+o1.__proto__ = o2     // Object {b: "x"}
+o2.__proto__ = o3     // Object {c: true}
+o1.b          // "x"
+o1.c          // true
+o2.a          // undefined
+o3.__proto__ = o1 // Uncaught TypeError: Cyclic __proto__ value
+```
 
-## Lezione 13: 11/02/2017
-
-Sommario
-
-* Ereditarietà pseudoclassica
-
-### Ereditarietà (pseudoclassica)
+### Approfondimento: ereditarietà (pseudoclassica)
 
 * Abbiamo detto che le proprietà di un prototipo sono automaticamente disponibili sulle istanze che hanno tale prototipo. Questa è una forma di **ereditarietà**.
 - Ma poiché un prototipo è a sua volta un oggetto, allora un prototipo possederà direttamente alcune proprietà e ne erediterà altre dal suo prototipo. In altre parole, si ha in generale una **catena di prototipi**.
@@ -1895,6 +1935,143 @@ function Square(side){
 ```
 
 * L'approccio basato su prototype chaining e constructor stealing è spesso chiamato **ereditarietà pseudo-classica** perché mima l'ereditarietà classica nei linguaggi basati su classi.
+
+<a name="lezione-1302"></a>
+
+<hr />
+
+## Lezione 13: 13/02/2017
+
+Sommario
+
+* Classi in ECMAScript 16
+* Esplorazione della libreria standard: stringhe ed espressioni regolari
+
+### Classi
+
+* Le proprietà possono essere create solo all'interno del costruttore o dei metodi.
+* Le classi sono in realtà **"zucchero sintattico"** sopra l'utilizzo di funzioni costruttrici, prototipi etc.
+* Chiamare il costruttore della classe senza `new` provoca un errore.
+* I metodi utilizzano la **"sintassi concisa"** disponibile da ES6: `{ myMethod(){...}, oldMethod: function(){...} }`
+* **Ereditarietà** si indica mediante `class ClasseFiglia extends ClassePadre`
+    - Una **classe figlia** (**sottoclasse**) eredita da una **classe padre** (**superclasse** o **classe base**).
+* All'interno dei metodi, `super` consente di richiamare funzionalità definite nelle superclassi.
+    - Si può anche utilizzare nei prototipi per riusare le funzionalità del prototipo del prototipo.
+* Quando una classe figlia specifica un metodo `m` già presente nella classe padre, quest'ultimo viene "sovrascritto", ma è possibile comunque riusarlo mediante chiamata esplicita `super.m()`.
+* I **metodi statici** (indicati con parola chiave `static`) appartengono alla classe (e non alle istanze); sono invocati attraverso `NomeClasse.metodoStatico(...)`.
+    - I metodi statici sono ereditati dalle sottoclassi.
+* Come per le funzioni, le classi sono elementi **first-class** e possono essere assegnate a variabili, usate come argomenti di funzioni, etc.
+
+```javascript 
+class Persona {
+  constructor(name, yob){ this.name = name; this.yearOfBirth = yob; }
+  get age(){ return new Date().getFullYear() - this.yearOfBirth; }
+  toString(){ return "Sono " + this.name + " and ho " + this.age + " anni."; }
+  
+  static descrizione(){ console.log("Ogni persona ha un nome."); }
+}
+
+//var p = Persona(); // TypeError: Class constructor Person cannot be invoked without 'new'
+var p = new Persona("Bob",1990);
+p.age // 27
+p.toString() // "Sono Bob e ho 27 anni."
+Persona.descrizione() // Prints: Ogni persona ha un nome.
+
+var Impiegato = class extends Persona {
+  constructor(name,yob){ 
+    super(name,yob); // Chiamata (necessaria) al costruttore della classe padre
+  }
+  toString(){ return super.toString() + " Sono un impiegato."; }
+}
+var i = new Impiegato("Bob",2000);
+i.toString() // // "Sono Bob e ho 17 anni. Sono un impiegato."
+Impiegato.descrizione() // Prints: Ogni persona ha un nome.
+```
+
+#### Esercizio: rettangoli e quadrati
+
+```javascript
+class Rect { /* DA IMPLEMENTARE */ }
+class Square { /* DA IMPLEMENTARE */ }
+
+// SPECIFICA
+var r = new Rect(2,3);
+r.area // 6
+r.toString() // "Sono un rettangolo di base 2 e altezza 3"
+r.diagonal // 3.605551275463989
+
+var s = new Square(8)
+s.diagonal // 11.313708498984761
+s.side = 10
+s.toString() // "Sono un quadrato di lato 10. Oppure... Sono un rettangolo di base 10 e altezza 10"
+s.width = 11
+s.area // 121
+```
+
+### Stringhe ed espressioni regolari
+
+#### Stringhe
+
+[A proposito delle stringhe nella guida di riferimento.](https://developer.mozilla.org/it/docs/Web/JavaScript/Reference/Global_Objects/String)
+
+* `length` restituisce la lunghezza della stringa
+* Concatenazione attraverso operatori `+` e `+=`
+* Confronto lessicografico tra stringhe mediante `<` e `>`
+* `charAt(i)`: ritorna il carattere all'indice `i` specificato.
+* `indexOf(s)`: ritorna l'indice della prima occorrenza della stringa `s` (dell'ultima via `lastIndexOf(s)`), oppure `-1`
+* `match(regex)`
+* `replace(olds,news)`
+* `substr(i,e)`
+* `toLowerCase(), toUpperCase()`
+* `trim()`
+
+#### Espressioni regolari
+
+[A proposito delle espressioni regolari nella guida di riferimento.](https://developer.mozilla.org/it/docs/Web/JavaScript/Reference/Global_Objects/RegExp)
+
+* Sintassi letterale: `/pattern/flags`
+* Sintassi "object-oriented": `new RegExp(pattern, flags)`
+* Flags
+    - **g**: match globale; trova tutte le corrispondenze invece di fermarsi alla prima
+    - **i**: ignora il case
+    - **m**: gestione di stringhe multi-linea; tratta i caratteri d'inizio e fine (`^`, `$`) per ogni linea.
+* Sintassi delle espressioni regolari: **caratteri**
+    - `.` corrisponde a qualunque carattere tranne i delimitatori di riga
+    - `\d` corrisponde a una qualunque cifra del pattern `[0-9]`
+    - `\D` corrisponde a qualunque carattere che NON è una cifra
+    - `\w` corrisponde a qualunque carattere alfanumerico del pattern `[a-zA-Z0-9_]`
+    - `\W` corrisponde a qualunque carattere che NON fa parte di una parola (cioè, il contrario di `\w`)
+    - `\s` corrisponde a uno spazio (spazio vuoto, tab, ..)
+    - `\S` corrisponde a un NON spazio
+* Sintassi delle espressioni regolari: **set di caratteri**
+    - `[xyz], [a-c]` set di caratteri
+    - `[^xyz], [^a-c]` negazione di un set di caratteri
+* Sintassi delle espressioni regolari: **alternativa**
+    - `x|y` corrisponde a `y` OPPURE `x`
+* Sintassi delle espressioni regolari: **limiti**
+    - `^` corrisponde all'inizio dell'input o di una linea in caso di regex multilinea
+    - `$` corrisponde alla fine dell'input (o di linea)
+    - `\b` corrisponde al limite di una parola; `\B` corrisponde a un NON-limite di una parola.
+
+<a name="lezione-1402"></a>
+
+<hr />
+
+## Lezione 14: 14/02/2017
+
+Sommario
+
+* TODO
+
+<a name="lezione-2102"></a>
+
+<hr />
+
+## Lezione 15: 21/02/2017
+
+Sommario
+
+* TODO
 
 -----------------------------------------
 
