@@ -5,7 +5,9 @@ Questo "quaderno" è un supporto per questo modulo IFTS di introduzione alla pro
 
 Pagine relative alle lezioni:
 
-* **[Lezione 13/02/2017](#lezione-1302)**, 13, 52/60 - Ripasso ed esercizi
+* [Lezione 14/02/2017](#lezione-1502), 15, 60/60 - Confronto fra JavaScript e Java/C#
+* [Lezione 14/02/2017](#lezione-1402), 14, 56/60 - Ripasso ed esercizi
+* **[Lezione 13/02/2017](#lezione-1302)**, 13, 52/60 - Classi in ECMAScript 6; stringhe ed espressioni regolari
 * [Lezione 10/02/2017](#lezione-1002), 12, 48/60 - Gestione degli errori; prototipi; esercizi
 * [Lezione 09/02/2017](#lezione-0902), 11, 44/60 - Dereferenziazione di oggetti e garbage collection; proprietà getter/setter; costruttori; esercizi
 * [Lezione 08/02/2017](#lezione-0802), 10, 40/60 - L'oggetto `Object`; l'oggetto `Array`; boxing; esercizi
