@@ -2074,57 +2074,6 @@ s.area
 // GET rect.height
 ```
 
-**ESERCIZIO: trovare il problema nella seguente implementazione**
-
-```javascript
-var Rect = class {
-  constructor(w,h){ this.width = w; this.height = h; }
-  get area(){ return this.width * this.height; }   get diagonal(){ return Math.sqrt(Math.pow(this.width,2) +  Math.pow(this.height,2)); }
-  toString(){ return "Sono un rettangolo di base " + this.width + " e altezza " + this.height + "."; }
-}
-
-var Square = class extends Rect {
-  constructor(s){ super(s, s); }
-  set side(s){ super.width = s; super.height = s; }
-  set width(w){ this.side = w; }
-  set height(h){ this.side = h; }
-  get width(){ return super.width; }
-  get height(){ return super.height; }
-  toString(){ return "Sono un quadrato di lato " + this.width + ". Oppure... " + super.toString(); }
-}
-```
-
-Consiglio: ispezionare/debuggare mediante stampe a console.
-
-```javascript
-var Rect = class {
-  constructor(w,h){ console.log("RECT constructor"); this.width = w; console.log("RECT constructor after setting this.width"); this.height = h; console.log("RECT constructor END"); }
-  get area(){ console.log("RECT.area"); return this.width * this.height; }   
-  get diagonal(){ return Math.sqrt(Math.pow(this.width,2) +  Math.pow(this.height,2)); }
-  toString(){ return "Sono un rettangolo di base " + this.width + " e altezza " + this.height + "."; }
-}
-
-var Square = class extends Rect {
-  constructor(s){ console.log("SQUARE constructor"); super(s, s); }
-  set side(s){ console.log("SET square.side"); super.width = s; super.height = s; }
-  set width(w){ console.log("SET square.width");this.side = w; }
-  set height(h){ console.log("SET square.height");this.side = h; }
-  get width(){ console.log("GET square.width");return super.width; }
-  get height(){ console.log("GET square.height");return super.height; }
-  toString(){ return "Sono un quadrato di lato " + this.width + ". Oppure... " + super.toString(); }
-}
-
-var s = new Square(8)
-// SQUARE constructor
-// RECT constructor
-// SET square.width
-// SET square.side
-// RECT constructor after setting this.width
-// RECT constructor END
-s.width = 11
-s // Square {width: 11, height: 8}
-```
-
 ### Stringhe
 
 [A proposito delle stringhe nella guida di riferimento.](https://developer.mozilla.org/it/docs/Web/JavaScript/Reference/Global_Objects/String)
