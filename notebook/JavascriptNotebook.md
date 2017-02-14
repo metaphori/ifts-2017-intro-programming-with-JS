@@ -1947,7 +1947,7 @@ function Square(side){
 Sommario
 
 * Classi in ECMAScript 16
-* Esplorazione della libreria standard: stringhe ed espressioni regolari
+* Esplorazione della libreria standard: stringhe
 
 ### Classi
 
@@ -2182,6 +2182,27 @@ while ((myArray = myRe.exec(str)) !== null) {
 // Found abb. Next match starts at 3
 // Found ab. Next match starts at 9
 ```
+
+#### Esercizio sulle espressioni regolari
+
+Parsing della sintassi letterale per gli oggetti in JavaScript (assumendo come valori leciti per proprietà solo interi e booleani).
+
+SOLUZIONE
+
+```javascript
+/^\{(?:\s*|(?:\s*(\w+)\s*:\s*([0-9]+|true|false)\s*)(?:,\s*(\w+)\s*:\s*([0-9]+|true|false)\s*)*)\}$/.exec("{ a: 10    , b:   true, c  : false    }")
+// Array[5]
+// 0 : "{ a: 10    , b:   true, c  : false    }"
+// 1 : "a"
+// 2 : "10"
+// 3 : "c"
+// 4 : "false"
+```
+
+Per farla possiamo spezzare il problema in sottoproblemi:
+
+1. Struttura globale: `^\{(\s*|P(,P)*)\}$` dove `P` rappresenta il pattern di una proprietà
+2. Struttura di ogni singola proprietà: `\s*(\w+)\s*:\s*([0-9]+|true|false)\s*`
 
 ### Ripasso e domande
 
