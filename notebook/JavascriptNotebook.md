@@ -5,9 +5,9 @@ Questo "quaderno" è un supporto per questo modulo IFTS di introduzione alla pro
 
 Pagine relative alle lezioni:
 
-* [Lezione 14/02/2017](#lezione-1502), 15, 60/60 - Confronto fra JavaScript e Java/C#
-* [Lezione 14/02/2017](#lezione-1402), 14, 56/60 - Ripasso ed esercizi
-* **[Lezione 13/02/2017](#lezione-1302)**, 13, 52/60 - Classi in ECMAScript 6; stringhe ed espressioni regolari
+* [Lezione 15/02/2017](#lezione-1502), 15, 60/60 - Confronto fra JavaScript e Java/C#
+* **[Lezione 14/02/2017](#lezione-1402)**, 14, 56/60 - Ripasso ed esercizi; breve panoramica alle espressioni regolari
+* [Lezione 13/02/2017](#lezione-1302), 13, 52/60 - Classi in ECMAScript 6; lavorare con le stringhe con metodi di `String.prototype`
 * [Lezione 10/02/2017](#lezione-1002), 12, 48/60 - Gestione degli errori; prototipi; esercizi
 * [Lezione 09/02/2017](#lezione-0902), 11, 44/60 - Dereferenziazione di oggetti e garbage collection; proprietà getter/setter; costruttori; esercizi
 * [Lezione 08/02/2017](#lezione-0802), 10, 40/60 - L'oggetto `Object`; l'oggetto `Array`; boxing; esercizi
@@ -2015,7 +2015,6 @@ s.area // 121
 **SOLUZIONE**
 
 ```javascript
-
 var Rect = class {
   constructor(w,h){ this._width = w; this._height = h; }
   get width(){ return this._width; }
@@ -2095,9 +2094,38 @@ var Square = class extends Rect {
 }
 ```
 
-### Stringhe ed espressioni regolari
+Consiglio: ispezionare/debuggare mediante stampe a console.
 
-#### Stringhe
+```javascript
+var Rect = class {
+  constructor(w,h){ console.log("RECT constructor"); this.width = w; console.log("RECT constructor after setting this.width"); this.height = h; console.log("RECT constructor END"); }
+  get area(){ console.log("RECT.area"); return this.width * this.height; }   
+  get diagonal(){ return Math.sqrt(Math.pow(this.width,2) +  Math.pow(this.height,2)); }
+  toString(){ return "Sono un rettangolo di base " + this.width + " e altezza " + this.height + "."; }
+}
+
+var Square = class extends Rect {
+  constructor(s){ console.log("SQUARE constructor"); super(s, s); }
+  set side(s){ console.log("SET square.side"); super.width = s; super.height = s; }
+  set width(w){ console.log("SET square.width");this.side = w; }
+  set height(h){ console.log("SET square.height");this.side = h; }
+  get width(){ console.log("GET square.width");return super.width; }
+  get height(){ console.log("GET square.height");return super.height; }
+  toString(){ return "Sono un quadrato di lato " + this.width + ". Oppure... " + super.toString(); }
+}
+
+var s = new Square(8)
+// SQUARE constructor
+// RECT constructor
+// SET square.width
+// SET square.side
+// RECT constructor after setting this.width
+// RECT constructor END
+s.width = 11
+s // Square {width: 11, height: 8}
+```
+
+### Stringhe
 
 [A proposito delle stringhe nella guida di riferimento.](https://developer.mozilla.org/it/docs/Web/JavaScript/Reference/Global_Objects/String)
 
@@ -2112,7 +2140,43 @@ var Square = class extends Rect {
 * `toLowerCase(), toUpperCase()`
 * `trim()`
 
-#### Espressioni regolari
+Esempi visti a lezione
+
+```javascript
+function replace(s, r, x){
+  var iocc = s.indexOf(r);
+  if(iocc==-1) return s;
+  var res = "";
+  for(var i=0; i<iocc; i++)
+    res += s[i];
+  res += x;
+  for(i=iocc+r.length; i<s.length; i++)
+    res += s[i];
+  return res;
+} 
+
+function replace(s, r, x){
+  var iocc = s.indexOf(r);
+  if(iocc==-1) return s;
+  var res = s.substr(0, iocc);
+  res += x;
+  res += s.substr(iocc + r.length, s.length-iocc-r.length);
+  return res;
+}
+```
+
+<a name="lezione-1402"></a>
+
+<hr />
+
+## Lezione 14: 14/02/2017
+
+Sommario
+
+* Espressioni regolari
+* Ripasso ed esercizi
+
+### Espressioni regolari
 
 [A proposito delle espressioni regolari nella guida di riferimento.](https://developer.mozilla.org/it/docs/Web/JavaScript/Reference/Global_Objects/RegExp)
 
@@ -2170,15 +2234,72 @@ while ((myArray = myRe.exec(str)) !== null) {
 // Found ab. Next match starts at 9
 ```
 
-<a name="lezione-1402"></a>
+### Ripasso e domande
 
-<hr />
+- Specifiche software e sviluppo behavior/test-driven
+- Paradigmi di programmazione
+- Embedding JavaScript in pagine HTML; la console (REPL)
+- Tipi di dato primitivi e riferimento
+- Espressioni e variabili
+- Programmazione imperativa
+- Strutture di controllo del flusso
+- Array
+- Programmazione funzionale e funzioni, in JavaScript
+- Funzioni ricorsive; funzioni di ordine superiore; chiusure
+- Programmazione ad oggetti ed oggetti, in JavaScript
+- Prototipi e classi in JavaScript
+- Gestione degli errori
+- Libreria standard: array, stringhe, date
 
-## Lezione 14: 14/02/2017
+### Esercizi
 
-Sommario
+**Esercizio 1**: Scrivere l'evoluzione dello stack delle chiamate
 
-* TODO
+```javascript
+function g(s){
+  return s.trim();
+}
+
+function f(s){
+  return g(s).toUpperCase();
+}
+
+function greet(who) {
+  console.log("Hello " + f(who));
+}
+
+greet("Harry");
+console.log("Bye");
+```
+
+**Esercizio 2**: Comprensione codice seguente
+
+```javascript
+function xyz(num, tl) {
+   var ns = num.toString();
+   var nz = tl - ns.length;
+   for (var i = 1; i <= nz; i++) {
+      ns = "0" + ns;
+   }
+   return ns;
+}
+```
+
+**Esercizio 3**: reimplementare i seguenti metodi di `Array.prototype`
+
+* `[2,4,8].every(function(n){ return n>0; }) // true` (verifica il predicato su ogni elemento)
+* `[2,4,8].some(function(n){ return n<0; }) // true` (testa se il predicato vale in almeno un elemento)
+* `unshift()`: aggiunge uno o più elementi in testa all'array e restituisce la nuova lunghezza dell'array.
+
+**Esercizio 4**: reimplementare i seguenti metodi di `String.prototype`
+
+* `split(sep)`: spezza una stringa in un array di stringhe, effettivamente separando la stringa in sottostringhe sulla base del separatore `sep`
+    - `"abc,def,ghi".split(",") // ["abc", "def", "ghi"]`
+    
+**Esercizio 5**: realizzare le seguenti funzionalità
+
+* `"abc".padStart(5,"*") // "**abc"` 
+Pads the current string from the start with a given string to create a new string from a given length
 
 <a name="lezione-2102"></a>
 
