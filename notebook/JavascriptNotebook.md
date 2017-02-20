@@ -5,8 +5,8 @@ Questo "quaderno" è un supporto per questo modulo IFTS di introduzione alla pro
 
 Pagine relative alle lezioni:
 
-* [Lezione 15/02/2017](#lezione-1502), 15, 60/60 - Confronto fra JavaScript e Java/C#
-* **[Lezione 14/02/2017](#lezione-1402)**, 14, 56/60 - Ripasso ed esercizi; breve panoramica alle espressioni regolari
+* **[Lezione 21/02/2017](#lezione-2102)**, 15, 60/60 - Consolidamento; esercizi; Javascript vs. Java/C#
+* [Lezione 14/02/2017](#lezione-1402), 14, 56/60 - Ripasso ed esercizi; breve panoramica alle espressioni regolari
 * [Lezione 13/02/2017](#lezione-1302), 13, 52/60 - Classi in ECMAScript 6; lavorare con le stringhe con metodi di `String.prototype`
 * [Lezione 10/02/2017](#lezione-1002), 12, 48/60 - Gestione degli errori; prototipi; esercizi
 * [Lezione 09/02/2017](#lezione-0902), 11, 44/60 - Dereferenziazione di oggetti e garbage collection; proprietà getter/setter; costruttori; esercizi
@@ -2242,7 +2242,20 @@ greet("Harry");
 console.log("Bye");
 ```
 
-**Esercizio 2**: Comprensione codice seguente
+<a name="lezione-2102"></a>
+
+<hr />
+
+## Lezione 15: 21/02/2017
+
+Sommario
+
+* Consolidamento ed esercizi
+* Introduzione alle differenze tra JavaScript e Java
+
+### Esercizi
+
+**Esercizio 1**: Comprensione codice seguente
 
 ```javascript
 function xyz(num, tl) {
@@ -2255,31 +2268,116 @@ function xyz(num, tl) {
 }
 ```
 
-**Esercizio 3**: reimplementare i seguenti metodi di `Array.prototype`
+**Esercizio 2**: reimplementare i seguenti metodi di `Array.prototype`
 
 * `[2,4,8].every(function(n){ return n>0; }) // true` (verifica il predicato su ogni elemento)
 * `[2,4,8].some(function(n){ return n<0; }) // true` (testa se il predicato vale in almeno un elemento)
 * `unshift()`: aggiunge uno o più elementi in testa all'array e restituisce la nuova lunghezza dell'array.
 
-**Esercizio 4**: reimplementare i seguenti metodi di `String.prototype`
+**Esercizio 3**: reimplementare i seguenti metodi di `String.prototype`
 
 * `split(sep)`: spezza una stringa in un array di stringhe, effettivamente separando la stringa in sottostringhe sulla base del separatore `sep`
     - `"abc,def,ghi".split(",") // ["abc", "def", "ghi"]`
     
-**Esercizio 5**: realizzare le seguenti funzionalità
+**Esercizio 4**: realizzare le seguenti funzionalità
 
 * `"abc".padStart(5,"*") // "**abc"` 
 Pads the current string from the start with a given string to create a new string from a given length
 
-<a name="lezione-2102"></a>
+### JavaScript vs. Java
 
-<hr />
+**Linguaggio di scripting vs. linguaggio di programmazione**
 
-## Lezione 15: 21/02/2017
+* JavaScript è un linguaggio di scripting perché istruisce il browser a effettuare certe operazioni.
+* In altre parole, un linguaggio di scripting viene eseguito in un "ambiente particolare" (come ad esempio il browser).
+* Tipicamente, un linguaggio di scripting è "interpretato".
+* Un linguaggio di scripting è una sotto-categoria dei linguaggi di programmazione.
+* Quindi: JavaScript è sia un linguaggio di programmazione sia un linguaggio di scripting; Java è un linguaggio di programmazione e NON un linguaggio di scripting.
 
-Sommario
+**Tipizzazione statica vs. dinamica**
 
-* TODO
+* Nei linguaggi tipati staticamente, la correttezza di un programma rispetto ai tipi viene verificata a **tempo statico**, cioè sul testo del programma.
+* Nei linguaggi tipati dinamicamente, la correttezza di un programma rispetto ai tipi viene verificata a **tempo di esecuzione**, cioè man mano che il programma viene eseguito.
+* **Java è tipato staticamente; JavaScript è tipato dinamicamente**.
+* In particolare, JavaScript supporta il cosiddetto **duck typing**: cioè, `o.m` è un'istruzione corretta dal punto di vista dei tipi se l'oggetto `o` include la proprietà `m`.
+
+**Tipizzazione manifesta vs. inferita/implicita**
+
+* JavaScript ha **tipizzazione implicita** in quanto non viene indicato il tipo delle variabili (**latent typing**); il tipo di esse dipenderà dal valore che sarà assegnato a tempo di esecuzione.
+* Java ha **tipizzazione manifesta** in quanto il programmatore è tenuto ad indicare il tipo di ogni variabile.
+* Simile ragionamento vale per le funzioni.
+
+```javascript
+/************** JAVASCRIPT ***************/
+var x = 88
+x = "abc"
+function f(a,b){ return a+b; }
+```
+
+```java
+/***************** JAVA *****************/
+int x = 88;
+//x = "abc"; // ERROR
+
+double f(int a, int b){ return a+b; }
+```
+
+**Tipizzazione debole vs. tipizzazione forte**
+
+* JavaScript è **tipato debolmente**; infatti, (1) prevede molte conversioni implicite tra tipi, e (2) le variabili sono "contenitori" neutri, cioè non hanno tipo (ciò che contengono, i valori, hanno un tipo).
+* Java è **tipato fortemente**; prevede alcune conversioni implicite tra tipi, e le variabili, una volta dichiarate, non possono contenere variabili di un tipo incompatibile.
+
+**Tipizzazione strutturale vs. nominale**: si riferisce al modo con cui sono stabilite le relazioni tra tipi
+
+* JavaScript prevede tipizzazione sia strutturale che nominale (non è molto chiaro).
+* Java prevede **tipizzazione nominale**, cioè compatibilità ed equivalenza tra tipi sono determinate da dichiarazioni esplicite e/o dai nomi dei tipi.
+
+**Sorgenti e programmi in Java**
+
+* In Java, ogni file sorgente di nome `C.java` corrisponde a una classe `C`.
+* Le classi sono organizzate in **package** la cui struttura corrisponde a quella delle cartelle sottostanti: la classe `C` sotto il package `a.b` (con nome pienamente qualificato `a.b.C`) sarà definita in `a/b/C.java`.
+* Un programma Java ha un punto di ingresso che è un metodo statico `void main(String[])`
+
+```java
+// JAVA
+package a.b;
+
+class C {
+  public static void main(String[] args){
+    // PUNTO DI INGRESSO DEL PROGRAMMA
+  }
+}
+```
+
+**Elementi di base di Java (vs. JavaScript)**
+
+* Il punto e virgola è obbligatorio per separare le istruzioni.
+
+**Programmazione ad oggetti in Java (vs. JavaScript)**
+
+* Il **costruttore** di una classe è un metodo con stesso nome della classe e senza tipo di ritorno
+* I campi e metodi di una classe hanno una certa visibilità: `public, private, protected` (se non indicata, la visibilità è detta "package-private", e significa: visibile all'interno del package)
+
+```java
+class Persona {
+  private String name;
+  private int age;
+  
+  public Persona(String name, int age){
+    this.name = name;
+    this.age = age;
+  }
+  
+  @Override public String toString(){
+    return "Sono " + this.name + " e ho " + this.age + " anni";
+  }
+}
+```
+
+**(Tipicamente) Java è compilato, JavaScript è interpretato**
+
+* Compilazione: `javac C.java` (produrrà un file `C.class` che contiene una rappresentazione)
+* Esecuzione: `java C`
 
 -----------------------------------------
 
