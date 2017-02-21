@@ -2284,6 +2284,27 @@ function xyz(num, tl) {
 * `"abc".padStart(5,"*") // "**abc"` 
 Pads the current string from the start with a given string to create a new string from a given length
 
+SOLUZIONE
+
+```javascript
+function split(str, sep){
+  var parts = [];
+  var s = "";
+  for(var i=0; i<str.length; i++){
+    for(var j=0; j<sep.length && str[i+j]==sep[j]; j++);
+    if(j == sep.length){
+      parts[parts.length] = s;
+      s = "";
+      i += sep.length-1;
+    } else {
+      s += str[i];
+    }
+  }
+  parts[parts.length] = s;
+  return parts;
+}
+```
+
 ### JavaScript vs. Java
 
 **Linguaggio di scripting vs. linguaggio di programmazione**
